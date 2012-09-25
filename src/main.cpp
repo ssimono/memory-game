@@ -3,7 +3,7 @@
 
 #include "square.h"
 
-SDL_Surface* screen; 
+SDL_Surface* screen;
 
 /**
  * Initialize SDL Window and video settings
@@ -25,12 +25,31 @@ void initSDL()
     SDL_WM_SetCaption("Memory game", NULL);
 }
 
+/**
+ * Function used for debug purpose
+ *
+ */
+void waitForKey()
+{
+    SDL_Event event;
+    
+    do
+    {
+        SDL_WaitEvent(&event);
+    }while(event.type != SDL_QUIT && event.type != SDL_KEYDOWN);
+}
+
 int main(int argc, char** argv)
 {
+    using namespace std;
+    
     initSDL();
     
-    SDL_Delay(5000);
-       
+    Square square(1,2);
+    cout<<square.getValue()<<endl;
+    
+    waitForKey();
+    
     SDL_FreeSurface(screen);
     
     return EXIT_SUCCESS;
