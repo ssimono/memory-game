@@ -10,8 +10,8 @@ class Square
     public:
 	Square(short id, short value);
 	
-	short get_id();
-	short get_value();
+	short getId();
+	short getValue();
 	
     private:
 	short id;
