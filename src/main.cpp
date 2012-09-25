@@ -45,7 +45,9 @@ int main(int argc, char** argv)
     
     initSDL();
     
-    Square square(1,2);
+    SDL_Rect rect;
+
+    Square square(1,2,45,54);
     cout<<square.getValue()<<endl;
     
     waitForKey();
