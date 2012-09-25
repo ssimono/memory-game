@@ -48,10 +48,15 @@ int main(int argc, char** argv)
     SDL_Rect rect;
 
     Square square(1,2,45,54);
-    cout<<square.getValue()<<endl;
+    
+    square.show(screen);    
+    waitForKey();
+    square.hide(screen);    
+    waitForKey();
+    square.reveal(screen);
+    
     
     waitForKey();
-    
     SDL_FreeSurface(screen);
     
     return EXIT_SUCCESS;

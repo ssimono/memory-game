@@ -24,3 +24,21 @@ short Square::getId()
 {
     return this->id;
 }
+
+void Square::show(SDL_Surface* screen)
+{
+    SDL_FillRect(screen, &this->rect, 0xff00ff);
+    SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
+}
+
+void Square::hide(SDL_Surface* screen)
+{
+    SDL_FillRect(screen, &this->rect, 0x00ff00);
+    SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
+}
+
+void Square::reveal(SDL_Surface* screen)
+{
+    SDL_FillRect(screen, &this->rect, 0xff0000);
+    SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
+}

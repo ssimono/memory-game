@@ -20,9 +20,9 @@ class Square
 	short getId();
 	short getValue();
 	
-	void show();
-	void hide();
-	void reveal();
+	void show(SDL_Surface* screen);
+	void hide(SDL_Surface* screen);
+	void reveal(SDL_Surface* screen);
 	
     private:
 	short id;
