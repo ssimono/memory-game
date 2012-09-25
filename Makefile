@@ -3,8 +3,8 @@ CFLAGS = -Wall `sdl-config --cflags`
 LIBS = `sdl-config --libs`
 COMPILE = $(CPP)
 
-SRC = src/main.cpp
-OBJ = main.o
+SRC = src/main.cpp src/square.cpp
+OBJ = main.o square.o
 
 BIN = memory-game
 
