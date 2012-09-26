@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SDL/SDL.h>
 
-#include "square.h"
+#include "board.h"
 
 SDL_Surface* screen;
 
