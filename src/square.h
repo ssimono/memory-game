@@ -16,6 +16,7 @@ class Square
 {
     public:
 	Square(short id, short value, int position_x, int position_y);
+	~Square();
 	
 	short getId();
 	short getValue();
@@ -28,6 +29,7 @@ class Square
 	short id;
 	short value;
 	State state;
+	SDL_Surface* sdl_surface;
 	
 	SDL_Rect rect;
 };
