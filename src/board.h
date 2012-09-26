@@ -15,6 +15,7 @@ class Board
 {
     public:
 	Board(SDL_Surface* screen, int nb_lines, int nb_columns);
+	~Board();
 	
 	int getWidth();
 	int getHeight();
@@ -23,7 +24,7 @@ class Board
 	int nbLines;
 	int nbColumns;
 	
-	std::vector<Square> squares;
+	std::vector<Square*> squares;
 	SDL_Surface* screen;
 	
 	void fill();

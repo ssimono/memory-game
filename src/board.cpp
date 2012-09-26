@@ -10,6 +10,13 @@ Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
     this->fill();
 }
 
+Board::~Board()
+{
+    std::vector<Square*>::iterator it;
+    for (it=this->squares.begin() ; it<this->squares.end() ; ++it)
+	delete *it;
+}
+
 void Board::fill()
 {
     int nb_squares = this->nbLines*this->nbColumns;
@@ -19,7 +26,9 @@ void Board::fill()
 	int x = BOARD_ORIGIN_X + (i % this->nbLines)*(SQUARE_WIDTH+SQUARE_MARGIN_RIGHT),
 	    y = BOARD_ORIGIN_Y + (i / this->nbColumns)*(SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
 	    
-	Square square(i, i/2, x, y);
-	square.hide(this->screen);
+	Square* square = new Square(i, i/2, x, y);
+	square->hide(this->screen);
+	
+	this->squares.push_back(square);
     }
 }

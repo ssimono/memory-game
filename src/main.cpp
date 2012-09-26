@@ -44,17 +44,7 @@ int main(int argc, char** argv)
     using namespace std;
     
     initSDL();
-    
-    SDL_Rect rect;
-
-    Square square(1,2,45,54);
-    
-    square.show(screen);    
-    waitForKey();
-    square.hide(screen);    
-    waitForKey();
-    square.reveal(screen);
-    
+        
     Board board(screen,4,4);    
     
     waitForKey();

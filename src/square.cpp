@@ -10,7 +10,6 @@ Square::Square(short id, short value, int position_x, int position_y)
     this->id = id;
     this->value = value;
     this->sdl_surface = SDL_LoadBMP( ( std::string("share/squares/") + images[this->value] ).c_str() );
-    std::clog<<SDL_GetError()<<std::endl;
     
     SDL_Rect rect;
     rect.x = position_x;
@@ -21,14 +20,14 @@ Square::Square(short id, short value, int position_x, int position_y)
     
     this->state = HIDDEN;
     
-    std::clog<<"Object square created"<<std::endl;
+    std::clog<<"Object square created ("<<this->id<<')'<<std::endl;
 }
 
 Square::~Square()
 {
     int i = 3;
     SDL_FreeSurface(this->sdl_surface);
-    std::clog<<"Object square destroyed"<<std::endl;
+    std::clog<<"Object square destroyed ("<<this->id<<')'<<std::endl;
 }
 
 short Square::getValue()

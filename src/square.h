@@ -6,7 +6,8 @@
 const int SQUARE_WIDTH  = 70;
 const int SQUARE_HEIGHT = 70;
 
-enum State{
+enum State
+{
     VISIBLE,
     HIDDEN,
     DISCOVERED
