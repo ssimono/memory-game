@@ -17,6 +17,8 @@ class Board
 	Board(SDL_Surface* screen, int nb_lines, int nb_columns);
 	~Board();
 	
+	int showSquare(int x, int y);
+	
 	int getWidth();
 	int getHeight();
 	
