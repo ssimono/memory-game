@@ -32,8 +32,8 @@ void Board::fill()
     
     for(int i = 0; i < nb_squares; ++i)
     {
-	int x = BOARD_ORIGIN_X + (i % this->nbLines)*(SQUARE_WIDTH+SQUARE_MARGIN_RIGHT),
-	    y = BOARD_ORIGIN_Y + (i / this->nbLines)*(SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
+	int x = BOARD_ORIGIN_X + (i % this->nbColumns)*(SQUARE_WIDTH+SQUARE_MARGIN_RIGHT),
+	    y = BOARD_ORIGIN_Y + (i / this->nbColumns)*(SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
 	    
 	Square* square = new Square(i, i/2, x, y);
 	square->hide(this->screen);
