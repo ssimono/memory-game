@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-std::string images[5] = {"clou.bmp","colquillage.bmp","creme.bmp","douche.bmp","elephant.bmp"};
+std::string images[8] = {"clou.bmp","coquillage.bmp","creme.bmp","douche.bmp","elephant.bmp","fesses.bmp","guitarre.bmp","igloo.bmp"};
 
 Square::Square(short id, short value, int position_x, int position_y)
 {

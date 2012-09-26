@@ -55,6 +55,7 @@ int main(int argc, char** argv)
     waitForKey();
     square.reveal(screen);
     
+    Board board(screen,4,4);    
     
     waitForKey();
     SDL_FreeSurface(screen);

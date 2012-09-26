@@ -2,11 +2,14 @@
 #define BOARD_H
 
 #include <iostream>
+#include <vector>
 
 #include "square.h"
 
-const int SQUARE_MARGIN_RIGHT = 5;
-const int SQUARE_MARGIN_LEFT  = 5;
+const int BOARD_ORIGIN_X	= 10;
+const int BOARD_ORIGIN_Y	= 10;
+const int SQUARE_MARGIN_RIGHT	= 5;
+const int SQUARE_MARGIN_BOTTOM	= 5;
 
 class Board
 {
@@ -20,7 +23,10 @@ class Board
 	int nbLines;
 	int nbColumns;
 	
+	std::vector<Square> squares;
 	SDL_Surface* screen;
+	
+	void fill();
 };
 
 #endif

@@ -6,5 +6,20 @@ Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
     this->nbLines = nb_lines;
     this->nbColumns = nb_columns;
     
-    std::clog<<"Object board created"<<std::endl;
+    this->squares.reserve( (nb_lines*nb_columns + 1)*sizeof(Square) );
+    this->fill();
+}
+
+void Board::fill()
+{
+    int nb_squares = this->nbLines*this->nbColumns;
+    
+    for(int i = 0; i < nb_squares; ++i)
+    {
+	int x = BOARD_ORIGIN_X + (i % this->nbLines)*(SQUARE_WIDTH+SQUARE_MARGIN_RIGHT),
+	    y = BOARD_ORIGIN_Y + (i / this->nbColumns)*(SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
+	    
+	Square square(i, i/2, x, y);
+	square.hide(this->screen);
+    }
 }
