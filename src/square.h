@@ -10,7 +10,7 @@ enum State
 {
     VISIBLE,
     HIDDEN,
-    DISCOVERED
+    FOUND
 };
 
 class Square
@@ -22,9 +22,9 @@ class Square
 	short getId();
 	short getValue();
 	
-	void show(SDL_Surface* screen);
-	void hide(SDL_Surface* screen);
-	void reveal(SDL_Surface* screen);
+	void flipIn(SDL_Surface* screen);
+	void flipOut(SDL_Surface* screen);
+	void markFound(SDL_Surface* screen);
 	
     private:
 	short id;

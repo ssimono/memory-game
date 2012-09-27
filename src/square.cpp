@@ -40,20 +40,23 @@ short Square::getId()
     return this->id;
 }
 
-void Square::show(SDL_Surface* screen)
+void Square::flipIn(SDL_Surface* screen)
 {
+    this->state = VISIBLE;
     SDL_BlitSurface(this->sdl_surface, NULL, screen, &this->rect);
     SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
 }
 
-void Square::hide(SDL_Surface* screen)
+void Square::flipOut(SDL_Surface* screen)
 {
+    this->state = HIDDEN;
     SDL_FillRect(screen, &this->rect, 0x00ff00);
     SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
 }
 
-void Square::reveal(SDL_Surface* screen)
+void Square::markFound(SDL_Surface* screen)
 {
+    this->state = FOUND;
     SDL_FillRect(screen, &this->rect, 0xff0000);
     SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
 }

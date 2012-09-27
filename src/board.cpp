@@ -2,6 +2,8 @@
 
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
 {
+    if(nb_lines&1 && nb_columns&1) throw 'e';
+    
     this->screen = screen;
     this->nbLines = nb_lines;
     this->nbColumns = nb_columns;
@@ -17,12 +19,12 @@ Board::~Board()
 	delete *it;
 }
 
-int Board::showSquare(int x, int y)
+int Board::flipSquareIn(int x, int y)
 {
     int id = x + y * this->nbColumns;
     Square* choice = this->squares[id];
     
-    choice->show(this->screen);
+    choice->flipIn(this->screen);
     return choice->getValue();
 }
 
@@ -36,7 +38,7 @@ void Board::fill()
 	    y = BOARD_ORIGIN_Y + (i / this->nbColumns)*(SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
 	    
 	Square* square = new Square(i, i/2, x, y);
-	square->hide(this->screen);
+	square->flipOut(this->screen);
 	
 	this->squares.push_back(square);
     }
