@@ -1,7 +1,9 @@
 #include <iostream>
+#include <time.h>
 #include <SDL/SDL.h>
 
 #include "board.h"
+#include "player.h"
 
 SDL_Surface* screen;
 
@@ -44,8 +46,9 @@ int main(int argc, char** argv)
     using namespace std;
     
     initSDL();
+    srand ( time(NULL) );
         
-    Board board(screen,4,4);    
+    Board board(screen,3,4);
     
     waitForKey();
     SDL_FreeSurface(screen);

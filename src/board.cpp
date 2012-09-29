@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "board.h"
 
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
@@ -32,12 +34,17 @@ void Board::fill()
 {
     int nb_squares = this->nbLines*this->nbColumns;
     
+    int values[nb_squares];
+    for (int i=0; i < nb_squares/2 ; ++i) values[2*i] = values[2*i+1] = i;
+    
+    std::random_shuffle(values, values + nb_squares);
+    
     for(int i = 0; i < nb_squares; ++i)
     {
 	int x = BOARD_ORIGIN_X + (i % this->nbColumns)*(SQUARE_WIDTH+SQUARE_MARGIN_RIGHT),
 	    y = BOARD_ORIGIN_Y + (i / this->nbColumns)*(SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
 	    
-	Square* square = new Square(i, i/2, x, y);
+	Square* square = new Square(i, values[i], x, y);
 	square->flipOut(this->screen);
 	
 	this->squares.push_back(square);
