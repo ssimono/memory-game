@@ -11,16 +11,21 @@ const int BOARD_ORIGIN_Y	= 10;
 const int SQUARE_MARGIN_RIGHT	= 5;
 const int SQUARE_MARGIN_BOTTOM	= 5;
 
+/**
+ * A Board game containing all squares
+ * It places squares on the screen, affects random values and handles Square's methods calling
+ */
 class Board
 {
     public:
 	Board(SDL_Surface* screen, int nb_lines, int nb_columns);
 	~Board();
 	
+	/**
+	 * Flip the square located ad [x,y] and shows the associated image
+	 * @return Value of the square
+	 */
 	int flipSquareIn(int x, int y);
-	
-	int getWidth();
-	int getHeight();
 	
     private:
 	int nbLines;
@@ -29,6 +34,10 @@ class Board
 	std::vector<Square*> squares;
 	SDL_Surface* screen;
 	
+	/**
+	 * Fill the board with squares and affect random
+	 * pairs of values
+	 */
 	void fill();
 };
 
