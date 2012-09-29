@@ -6,13 +6,20 @@
 const int SQUARE_WIDTH  = 70;
 const int SQUARE_HEIGHT = 70;
 
-enum State
+/**
+ * Differents status a square can have
+ */
+enum Status
 {
     VISIBLE,
     HIDDEN,
     FOUND
 };
 
+/**
+ * A square on the board game
+ * This contains a value (image) and is located at a specific location
+ */
 class Square
 {
     public:
@@ -29,7 +36,7 @@ class Square
     private:
 	short id;
 	short value;
-	State state;
+	Status status;
 	SDL_Surface* sdl_surface;
 	
 	SDL_Rect rect;
