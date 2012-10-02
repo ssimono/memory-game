@@ -35,6 +35,37 @@ int Board::flipSquareIn(int x, int y)
     return choice->getValue();
 }
 
+SquarePosition Board::findSquare(int x, int y)
+{
+    // Substract board's origin to get rid of the offset
+    x-= BOARD_ORIGIN_X;
+    y-= BOARD_ORIGIN_Y;
+    
+    // Divide x by width of a square: we get column number
+    int column = x / (SQUARE_WIDTH+SQUARE_MARGIN_RIGHT);
+    if (column >= this->nbColumns ) throw 1;
+    
+    // Make sure player did not click between two squares
+    x -= (column+1) * (SQUARE_WIDTH+SQUARE_MARGIN_RIGHT);
+    x += SQUARE_MARGIN_RIGHT;
+    if (x > 0) throw 2;
+    
+    //Divide y by height of a square: we get line number
+    int line = y / (SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
+    if (line >= this->nbLines ) throw 3;
+    
+    // Make sure player did not click between two squares
+    y -= (line+1) * (SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
+    y += SQUARE_MARGIN_BOTTOM;
+    if (y > 0) throw 4;
+    
+    SquarePosition pos;
+    pos.column = column;
+    pos.line = line;
+    
+    return pos;
+}
+
 void Board::fill()
 {
     int nb_squares = this->nbLines*this->nbColumns;

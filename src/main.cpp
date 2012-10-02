@@ -49,6 +49,10 @@ int main(int argc, char** argv)
         
     Board board(screen,3,4);
     
+    Player chuck(&board);
+    
+    while(chuck.play());
+    
     waitForKey();
     SDL_FreeSurface(screen);
     
