@@ -3,7 +3,7 @@
 
 #include "square.h"
 
-std::string images[8] = {"clou.bmp","coquillage.bmp","creme.bmp","douche.bmp","elephant.bmp","fesses.bmp","guitarre.bmp","igloo.bmp"};
+std::string images[23] = {"araignee.bmp","arbre.bmp","ballon.bmp","champignon.bmp","clou.bmp","coquillage.bmp","creme.bmp","douche.bmp","elephant.bmp","fesses.bmp","guitarre.bmp","igloo.bmp","judoka.bmp","maison.bmp","manette.bmp","ours.bmp","pamplemousse.bmp","parapluie.bmp","piece.bmp","poule.bmp","salade.bmp","tasse.bmp","tetine.bmp"};
 
 Square::Square(short id, short value, int position_x, int position_y)
 {
@@ -11,6 +11,7 @@ Square::Square(short id, short value, int position_x, int position_y)
     this->value = value;
     
     // Loads a SDL_Surface to hold the image data
+    // Image is chosen according to square instance's value
     this->sdl_surface = SDL_LoadBMP( ( std::string("share/squares/") + images[this->value] ).c_str() );
     
     SDL_Rect rect;
@@ -22,14 +23,14 @@ Square::Square(short id, short value, int position_x, int position_y)
     
     this->status = HIDDEN;
     
-    std::clog<<"Object square created ("<<this->id<<')'<<std::endl;
+    std::clog<<"Square object created ("<<this->id<<')'<<std::endl;
 }
 
 Square::~Square()
 {
     int i = 3;
     SDL_FreeSurface(this->sdl_surface);
-    std::clog<<"Object square destroyed ("<<this->id<<')'<<std::endl;
+    std::clog<<"Square object destroyed ("<<this->id<<')'<<std::endl;
 }
 
 short Square::getValue()

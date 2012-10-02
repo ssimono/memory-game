@@ -1,7 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <iostream>
 #include <vector>
 
 #include "square.h"
@@ -35,8 +34,7 @@ class Board
 	SDL_Surface* screen;
 	
 	/**
-	 * Fill the board with squares and affect random
-	 * pairs of values
+	 * Fill the board with squares and affect random pairs of values
 	 */
 	void fill();
 };

@@ -5,11 +5,11 @@
 #include "board.h"
 #include "player.h"
 
+// Main SDL_Surface
 SDL_Surface* screen;
 
 /**
  * Initialize SDL Window and video settings
- *
  */
 void initSDL()
 {
@@ -29,7 +29,6 @@ void initSDL()
 
 /**
  * Function used for debug purpose
- *
  */
 void waitForKey()
 {
