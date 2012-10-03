@@ -1,6 +1,6 @@
 Memory Game
 =================
-* This application is licenced under [GNU General Public License, Version 3.0](http://www.gnu.org/copyleft/gpl.html)
+This application is licenced under [GNU General Public License, Version 3.0](http://www.gnu.org/copyleft/gpl.html)
 
 Summary
 -------
