@@ -53,12 +53,15 @@ int main(int argc, char** argv)
 	Board board(screen,5,6);
     
 	Player chuck(&board);
-    
+	
+	while(true)
 	while(chuck.play())
 	{
 	    chuck.getPoint();
+	    cout<<"Well done, Chuck!"<<endl;
 	}
     }
+    catch(signal::UserQuitRequest) {}
     catch(GameException ge)
     {
 	SDL_FreeSurface(screen);

@@ -15,21 +15,16 @@ void Player::getPoint()
 
 bool Player::play()
 {
-    try
-    {
-        // First tour:
-        int first_value = this->chooseSquare();
-        
-        // Second tour:
-        int second_value = this->chooseSquare();
-        
-        return (first_value == second_value);
-    }
-    catch(int i)
-    {
-        std::cerr<<"chooseSquare thrown an exception ("<<i<<"), returning"<<std::endl;
-        return false;
-    }
+    // First tour:
+    int first_value = this->chooseSquare();
+    
+    // Second tour:
+    int second_value = this->chooseSquare();
+    
+    // Hide squares:
+    this->board->hideVisibleSquares();
+    
+    return (first_value == second_value);
 }
 
 int Player::chooseSquare()
@@ -43,10 +38,10 @@ int Player::chooseSquare()
         switch(event.type)
         {
             case SDL_QUIT:
-                throw 1;
+                throw signal::UserQuitRequest();
                 break;
             case SDL_KEYDOWN:
-                throw 2;
+                throw signal::UserQuitRequest();
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 using namespace std;

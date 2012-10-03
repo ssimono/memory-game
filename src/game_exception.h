@@ -9,7 +9,8 @@ namespace error
     {
 	UnknownError,
 	CannotLoadFile,		// Fail to load BMP file with SDL_LoadBMP function
-	SquareNumberOdd		// Odd number of squares on the board
+	SquareNumberOdd,	// Odd number of squares on the board
+	TurnNotDone		// Ask to flip squares out before second turn
     };
 }
 

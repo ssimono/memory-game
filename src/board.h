@@ -11,10 +11,18 @@ const int BOARD_ORIGIN_Y	= 10;
 const int SQUARE_MARGIN_RIGHT	= 5;
 const int SQUARE_MARGIN_BOTTOM	= 5;
 
+const int SHOW_DURATION		= 1500;
+
 struct SquarePosition
 {
     int column;
     int line;
+};
+
+enum Tour
+{
+    FIRST_TOUR,
+    SECOND_TOUR
 };
 
 /**
@@ -34,10 +42,16 @@ class Board
 	int flipSquareIn(int x, int y);
 	
 	/**
+	 * FlipOut squares that have been flipped in
+	 * should only be called after second tour
+	 */
+	void hideVisibleSquares();
+	
+	/**
 	 * Return the [column,line] position of the square that has been clicked
 	 * by a click event on [x,y]
 	 * @return SquarePosition
-	 * @throw int if no square is located at the given coordinates
+	 * @throw signal::ClickedOutside if no square is located at the given coordinates
 	 */
 	SquarePosition findSquare(int x, int y);
 	
@@ -47,6 +61,9 @@ class Board
 	
 	std::vector<Square*> squares;
 	SDL_Surface* screen;
+	
+	Square* visible[2];
+	Tour tour;
 	
 	/**
 	 * Fill the board with squares and affect random pairs of values

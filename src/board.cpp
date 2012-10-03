@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <string>
 #include <sstream>
 
 #include "game_exception.h"
@@ -17,6 +18,7 @@ Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
     this->screen = screen;
     this->nbLines = nb_lines;
     this->nbColumns = nb_columns;
+    this->tour = FIRST_TOUR;
     
     // Allocate required space in memory to make sure vector does not need to reallocate
     // I booked one more spot just in case it does not fit to the very last bit
@@ -39,7 +41,33 @@ int Board::flipSquareIn(int x, int y)
     
     choice->flipIn(this->screen);
     
+    switch(this->tour)
+    {
+	case FIRST_TOUR:
+	    this->visible[0] = choice;
+	    this->tour = SECOND_TOUR;
+	    break;
+	case SECOND_TOUR:
+	    this->visible[1] = choice;
+	    SDL_Delay(SHOW_DURATION);
+	    break;
+	default:
+	    break;
+    }
+    
     return choice->getValue();
+}
+
+void Board::hideVisibleSquares()
+{
+    if(this->tour != SECOND_TOUR)
+	throw GameException(error::TurnNotDone,
+			    std::string("Cannot flip squares out before second turn"));
+    
+    this->visible[0]->flipOut(this->screen);
+    this->visible[1]->flipOut(this->screen);
+    
+    this->tour = FIRST_TOUR;
 }
 
 SquarePosition Board::findSquare(int x, int y)
