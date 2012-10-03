@@ -54,6 +54,9 @@ short Square::getId()
 
 void Square::flipIn(SDL_Surface* screen)
 {
+    // Does not allow to show a square already visible (or already found)
+    if(this->status != HIDDEN) throw signal::AlreadyVisible();
+    
     this->status = VISIBLE;
     SDL_BlitSurface(this->sdl_surface, NULL, screen, &this->rect);
     SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);

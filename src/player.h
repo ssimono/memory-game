@@ -10,14 +10,16 @@ class Player
 	
 	bool play();
 	
+	void getPoint();
+	
     private:
 	Board* board;
-	
+	int score;
 	/**
 	 * Let the human user choose a square by clicking on it
-	 * @return structure containing line and column of chosen square
+	 * @return value of the chosen square
 	 */
-	SquarePosition chooseSquare();
+	int chooseSquare();
 };
 
 #endif

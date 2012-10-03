@@ -3,6 +3,8 @@
 
 #include <SDL/SDL.h>
 
+#include "game_exception.h"
+
 const int SQUARE_WIDTH  = 70;
 const int SQUARE_HEIGHT = 70;
 
@@ -41,5 +43,10 @@ class Square
 	
 	SDL_Rect rect;
 };
+
+namespace signal
+{
+    class AlreadyVisible:public GameSignal{};
+}
 
 #endif

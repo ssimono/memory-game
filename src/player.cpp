@@ -5,16 +5,25 @@
 Player::Player(Board* board)
 {
     this->board = board;
+    this->score = 0;
+}
+
+void Player::getPoint()
+{
+    this->score++;
 }
 
 bool Player::play()
 {
     try
     {
-        SquarePosition chosen_square = this->chooseSquare();
-        this->board->flipSquareIn(chosen_square.column, chosen_square.line);
+        // First tour:
+        int first_value = this->chooseSquare();
         
-        return true;
+        // Second tour:
+        int second_value = this->chooseSquare();
+        
+        return (first_value == second_value);
     }
     catch(int i)
     {
@@ -23,7 +32,7 @@ bool Player::play()
     }
 }
 
-SquarePosition Player::chooseSquare()
+int Player::chooseSquare()
 {
     SDL_Event event;
     
@@ -45,9 +54,11 @@ SquarePosition Player::chooseSquare()
                 try
                 {
                     SquarePosition pos = this->board->findSquare(event.button.x, event.button.y);
-                    return pos;
+                    int value = this->board->flipSquareIn(pos.column, pos.line);
+                    return value;
                 }
                 catch(signal::ClickedOutside){ continue; }
+                catch(signal::AlreadyVisible){ continue; }
             default:
                 continue;
         }

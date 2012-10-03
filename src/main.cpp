@@ -54,7 +54,10 @@ int main(int argc, char** argv)
     
 	Player chuck(&board);
     
-	while(chuck.play());
+	while(chuck.play())
+	{
+	    chuck.getPoint();
+	}
     }
     catch(GameException ge)
     {
@@ -66,7 +69,6 @@ int main(int argc, char** argv)
 	return EXIT_FAILURE;
     }
     
-    waitForKey();
     SDL_FreeSurface(screen);
     
     return EXIT_SUCCESS;
