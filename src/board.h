@@ -51,6 +51,12 @@ class Board
 	 * Fill the board with squares and affect random pairs of values
 	 */
 	void fill();
+	
+	/**
+	 * Free n first squares, in case nth square crashed
+	 * @param n First squares to clean, n not included
+	 */
+	void cleanFirstSquares(int n);
 };
 
 #endif

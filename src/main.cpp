@@ -2,6 +2,7 @@
 #include <time.h>
 #include <SDL/SDL.h>
 
+#include "game_exception.h"
 #include "board.h"
 #include "player.h"
 
@@ -46,12 +47,24 @@ int main(int argc, char** argv)
     
     initSDL();
     srand ( time(NULL) );
-        
-    Board board(screen,3,4);
     
-    Player chuck(&board);
+    try
+    {
+	Board board(screen,3,4);
     
-    while(chuck.play());
+	Player chuck(&board);
+    
+	while(chuck.play());
+    }
+    catch(GameException ge)
+    {
+	SDL_FreeSurface(screen);
+	
+	cerr<<ge.getMessage()<<endl;
+	cerr<<"Terminating"<<endl;
+	
+	return EXIT_FAILURE;
+    }
     
     waitForKey();
     SDL_FreeSurface(screen);

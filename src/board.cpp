@@ -1,5 +1,7 @@
+#include <iostream>
 #include <algorithm>
 
+#include "game_exception.h"
 #include "board.h"
 
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
@@ -79,12 +81,29 @@ void Board::fill()
     
     for(int i = 0; i < nb_squares; ++i)
     {
+	Square* square;
+	
 	int x = BOARD_ORIGIN_X + (i % this->nbColumns)*(SQUARE_WIDTH+SQUARE_MARGIN_RIGHT),
 	    y = BOARD_ORIGIN_Y + (i / this->nbColumns)*(SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
+	
+	try
+	{
+	    square = new Square(i, values[i], x, y);
+	    square->flipOut(this->screen);
+	}
+	catch(GameException ge)
+	{
+	    // If an exception is thrown, we free squares already allocated
+	    this->cleanFirstSquares(i);
 	    
-	Square* square = new Square(i, values[i], x, y);
-	square->flipOut(this->screen);
+	    throw ge;
+	}
 	
 	this->squares.push_back(square);
     }
+}
+
+void Board::cleanFirstSquares(int n)
+{
+    for(int i=0; i<n; ++i) delete (this->squares[i]);
 }
