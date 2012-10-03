@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     
     try
     {
-	Board board(screen,3,4);
+	Board board(screen,5,6);
     
 	Player chuck(&board);
     
@@ -60,7 +60,7 @@ int main(int argc, char** argv)
     {
 	SDL_FreeSurface(screen);
 	
-	cerr<<ge.getMessage()<<endl;
+	cerr<<"[code #"<<ge.getId()<<"] "<<ge.getMessage()<<endl;
 	cerr<<"Terminating"<<endl;
 	
 	return EXIT_FAILURE;

@@ -7,7 +7,8 @@ namespace error
 {
     enum ErrorId
     {
-	CannotLoadFile		// Fail to load BMP file with SDL_LoadBMP function
+	CannotLoadFile,		// Fail to load BMP file with SDL_LoadBMP function
+	SquareNumberOdd		// Odd number of squares on the board
     };
 }
 

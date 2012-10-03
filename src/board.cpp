@@ -1,13 +1,18 @@
 #include <iostream>
 #include <algorithm>
+#include <sstream>
 
 #include "game_exception.h"
 #include "board.h"
 
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
 {
-    // Make sure there is an even number of squares
-    if(nb_lines&1 && nb_columns&1) throw 'e';
+    // Throw an exception id the number of squares is not even
+    if(nb_lines&1 && nb_columns&1){
+        std::ostringstream oss;
+        oss<<"Board need an even number of squares, "<<nb_lines<<"x"<<nb_columns<<" will not work";
+        throw GameException(error::SquareNumberOdd, oss.str());
+    }
     
     this->screen = screen;
     this->nbLines = nb_lines;
