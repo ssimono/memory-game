@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "game_exception.h"
 #include "square.h"
 
 const int BOARD_ORIGIN_X	= 10;
@@ -58,5 +59,10 @@ class Board
 	 */
 	void cleanFirstSquares(int n);
 };
+
+namespace signal
+{
+    class ClickedOutside:public GameSignal{};
+}
 
 #endif

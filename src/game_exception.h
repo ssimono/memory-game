@@ -7,11 +7,15 @@ namespace error
 {
     enum ErrorId
     {
+	UnknownError,
 	CannotLoadFile,		// Fail to load BMP file with SDL_LoadBMP function
 	SquareNumberOdd		// Odd number of squares on the board
     };
 }
 
+/**
+ * Class used to handle exception through program process
+ */
 class GameException
 {
     public:
@@ -33,6 +37,16 @@ class GameException
     private:
 	error::ErrorId id;
 	std::string message;
+};
+
+/**
+ * Unlike GameException, GameSignal instances are meant to be thrown as part
+ * of the game workflow, they do not terminate the game
+ */
+class GameSignal:public GameException
+{
+    public:
+	GameSignal() : GameException(error::UnknownError,std::string("")) {}
 };
 
 #endif

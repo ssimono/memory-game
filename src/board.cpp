@@ -50,21 +50,20 @@ SquarePosition Board::findSquare(int x, int y)
     
     // Divide x by width of a square: we get column number
     int column = x / (SQUARE_WIDTH+SQUARE_MARGIN_RIGHT);
-    if (column >= this->nbColumns ) throw 1;
+    if (column >= this->nbColumns ) throw signal::ClickedOutside();
+    
+    //Divide y by height of a square: we get line number
+    int line = y / (SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
+    if (line >= this->nbLines ) throw signal::ClickedOutside();
     
     // Make sure player did not click between two squares
     x -= (column+1) * (SQUARE_WIDTH+SQUARE_MARGIN_RIGHT);
     x += SQUARE_MARGIN_RIGHT;
-    if (x > 0) throw 2;
-    
-    //Divide y by height of a square: we get line number
-    int line = y / (SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
-    if (line >= this->nbLines ) throw 3;
-    
-    // Make sure player did not click between two squares
+    if (x > 0) throw signal::ClickedOutside();
+    // Same for click between two vertically aligned squares
     y -= (line+1) * (SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
     y += SQUARE_MARGIN_BOTTOM;
-    if (y > 0) throw 4;
+    if (y > 0) throw signal::ClickedOutside();
     
     SquarePosition pos;
     pos.column = column;

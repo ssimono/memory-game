@@ -47,10 +47,7 @@ SquarePosition Player::chooseSquare()
                     SquarePosition pos = this->board->findSquare(event.button.x, event.button.y);
                     return pos;
                 }
-                catch(int i)
-                {
-                    cerr<<"Exception caught : "<<i<<endl;
-                }
+                catch(signal::ClickedOutside){ continue; }
             default:
                 continue;
         }
