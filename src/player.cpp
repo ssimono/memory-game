@@ -31,6 +31,10 @@ int Player::chooseSquare()
 {
     SDL_Event event;
     
+    // Clean the event queue before waiting event
+    while(SDL_PollEvent(&event))
+	if(event.type == SDL_QUIT) throw signal::UserQuitRequest();
+    
     while(true)
     {
         SDL_WaitEvent(&event);
