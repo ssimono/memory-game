@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "player.h"
 
 Player::Player(Board* board)
@@ -47,7 +45,6 @@ int Player::chooseSquare()
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 using namespace std;
-                cout<<"Click ("<<event.button.x<<','<<event.button.y<<')'<<endl;
                 try
                 {
                     SquarePosition pos = this->board->findSquare(event.button.x, event.button.y);

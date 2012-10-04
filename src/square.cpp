@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -32,14 +31,11 @@ Square::Square(short id, short value, int position_x, int position_y)
     this->rect = rect;
     
     this->status = HIDDEN;
-    
-    std::clog<<"Square object created ("<<this->id<<')'<<std::endl;
 }
 
 Square::~Square()
 {
     if(this->sdl_surface != NULL) SDL_FreeSurface(this->sdl_surface);
-    std::clog<<"Square object destroyed ("<<this->id<<')'<<std::endl;
 }
 
 short Square::getValue()
