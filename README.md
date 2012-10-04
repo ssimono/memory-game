@@ -12,11 +12,15 @@ Building
 
 ### On GNU/Linux:
 To build the game you will need SDL developement library: [www.libsdl.org](http://www.libsdl.org). On debian-based distributions, a simple
-    sudo apt-get install libsdl1.2-dev
+```
+sudo apt-get install libsdl1.2-dev
+```
 should do the job.
 Then
-    make
-    ./memory-game
+```
+make
+./memory-game
+```
     
 ### On Windows:
 No tested yet, but you will just need to install SDL as well, and put the SDL dll file in the same directory as the built exe.
