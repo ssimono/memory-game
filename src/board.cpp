@@ -22,7 +22,7 @@ Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
     
     // Allocate required space in memory to make sure vector does not need to reallocate
     // I booked one more spot just in case it does not fit to the very last bit
-    this->squares.reserve( (nb_lines*nb_columns + 1)*sizeof(Square) );
+    this->squares.reserve( (this->getNbSquares() + 1)*sizeof(Square) );
     
     this->fill();
 }
@@ -100,6 +100,7 @@ SquarePosition Board::findSquare(int x, int y)
     x -= (column+1) * (SQUARE_WIDTH+SQUARE_MARGIN_RIGHT);
     x += SQUARE_MARGIN_RIGHT;
     if (x > 0) throw signal::ClickedOutside();
+    
     // Same for click between two vertically aligned squares
     y -= (line+1) * (SQUARE_HEIGHT+SQUARE_MARGIN_BOTTOM);
     y += SQUARE_MARGIN_BOTTOM;
@@ -112,9 +113,14 @@ SquarePosition Board::findSquare(int x, int y)
     return pos;
 }
 
+int Board::getNbSquares()
+{
+    return this->nbLines * this->nbColumns;
+}
+
 void Board::fill()
 {
-    int nb_squares = this->nbLines*this->nbColumns;
+    int nb_squares = this->getNbSquares();
     int values[nb_squares];
     
     // Fill values array with couples like {a,a,b,b,c,c...}

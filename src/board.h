@@ -55,6 +55,11 @@ class Board
 	 */
 	SquarePosition findSquare(int x, int y);
 	
+	/**
+	 * Return the number of squares on the board
+	 */
+	int getNbSquares();
+	
     private:
 	int nbLines;
 	int nbColumns;
