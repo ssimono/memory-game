@@ -42,7 +42,7 @@ class Board
 	int flipSquareIn(int x, int y);
 	
 	/**
-	 * FlipOut squares that have been flipped in
+	 * Flip out squares that have been flipped in
 	 * should only be called after second tour
 	 */
 	void hideVisibleSquares();

@@ -64,8 +64,20 @@ void Board::hideVisibleSquares()
 	throw GameException(error::TurnNotDone,
 			    std::string("Cannot flip squares out before second turn"));
     
-    this->visible[0]->flipOut(this->screen);
-    this->visible[1]->flipOut(this->screen);
+    Square* first = this->visible[0];
+    Square* second = this->visible[1];
+    SDL_Surface* s = this->screen;
+    
+    if(first->getValue() == second->getValue())
+    {
+	first->markFound(s);
+	second->markFound(s);
+    }
+    else
+    {
+	first->flipOut(s);
+	second->flipOut(s);
+    }
     
     this->tour = FIRST_TOUR;
 }
