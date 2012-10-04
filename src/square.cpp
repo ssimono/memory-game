@@ -61,7 +61,7 @@ void Square::flipIn(SDL_Surface* screen)
 void Square::flipOut(SDL_Surface* screen)
 {
     this->status = HIDDEN;
-    SDL_FillRect(screen, &this->rect, 0x00ff00);
+    SDL_FillRect(screen, &this->rect, 0x27863f);
     SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
 }
 

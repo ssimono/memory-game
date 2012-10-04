@@ -33,6 +33,9 @@ void initSDL()
         exit(EXIT_FAILURE);
     }
     SDL_WM_SetCaption("Memory game", NULL);
+    
+    SDL_FillRect(screen, NULL, 0xdfdfdf);
+    SDL_UpdateRect(screen, 0,0,width,height);
 }
 
 int main(int argc, char** argv)
