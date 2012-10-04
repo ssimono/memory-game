@@ -23,7 +23,11 @@ make
 ```
     
 ### On Windows:
-No tested yet, but you will just need to install SDL as well, and put the SDL dll file in the same directory as the built exe.
+To build with ming32, you need SDL Library as well. Paste Include files into {include path}\SDL and lib files into {lib path}. Make sure you add these options for link editing:
+```
+-lmingw32 -lSDLmain -lSDL
+```
+To run the game, put the SDL's DLL file in the same directory as the built exe.
 
 About
 -----
