@@ -6,8 +6,8 @@
 #include "game_exception.h"
 #include "square.h"
 
-const int BOARD_ORIGIN_X	= 10;
-const int BOARD_ORIGIN_Y	= 10;
+const int BOARD_ORIGIN_X	= 5;
+const int BOARD_ORIGIN_Y	= 5;
 const int SQUARE_MARGIN_RIGHT	= 5;
 const int SQUARE_MARGIN_BOTTOM	= 5;
 
