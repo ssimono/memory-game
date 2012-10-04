@@ -15,6 +15,8 @@ void Player::getPoint()
 
 bool Player::play()
 {
+    if( this->board->isFinished() ) return false;
+    
     // First tour:
     int first_value = this->chooseSquare();
     

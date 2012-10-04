@@ -19,6 +19,7 @@ Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
     this->nbLines = nb_lines;
     this->nbColumns = nb_columns;
     this->tour = FIRST_TOUR;
+    this->nbSquaresFound = 0;
     
     // Allocate required space in memory to make sure vector does not need to reallocate
     // I booked one more spot just in case it does not fit to the very last bit
@@ -72,6 +73,8 @@ void Board::hideVisibleSquares()
     {
 	first->markFound(s);
 	second->markFound(s);
+	
+	this->nbSquaresFound += 2;
     }
     else
     {
@@ -111,6 +114,11 @@ SquarePosition Board::findSquare(int x, int y)
     pos.line = line;
     
     return pos;
+}
+
+bool Board::isFinished()
+{
+    return this->nbSquaresFound == this->getNbSquares();
 }
 
 int Board::getNbSquares()

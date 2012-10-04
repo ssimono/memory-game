@@ -50,16 +50,14 @@ int main(int argc, char** argv)
     
     try
     {
-	Board board(screen,5,6);
+	Board board(screen,2,2);
     
 	Player chuck(&board);
 	
-	while(true)
-	while(chuck.play())
+	do
 	{
-	    chuck.getPoint();
-	    cout<<"Well done, Chuck!"<<endl;
-	}
+	    while(chuck.play()) chuck.getPoint();
+	}while( !board.isFinished() );
     }
     catch(signal::UserQuitRequest) {}
     catch(GameException ge)

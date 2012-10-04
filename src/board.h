@@ -55,6 +55,11 @@ class Board
 	 */
 	SquarePosition findSquare(int x, int y);
 	
+	/*
+	 * Return a boolean telling if all squares have been found
+	 */
+	bool isFinished();
+	
 	/**
 	 * Return the number of squares on the board
 	 */
@@ -63,6 +68,8 @@ class Board
     private:
 	int nbLines;
 	int nbColumns;
+	
+	int nbSquaresFound;
 	
 	std::vector<Square*> squares;
 	SDL_Surface* screen;
