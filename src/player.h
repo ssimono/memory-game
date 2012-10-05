@@ -24,8 +24,4 @@ class Player
 	int chooseSquare();
 };
 
-namespace signal
-{
-    class UserQuitRequest:public GameSignal{};
-}
 #endif

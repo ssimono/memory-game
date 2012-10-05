@@ -44,21 +44,4 @@ class Square
 	SDL_Rect rect;
 };
 
-namespace error
-{
-    class CannotLoadFile:public GameException
-    {
-	public: CannotLoadFile(std::string path){
-	    std::ostringstream oss;
-	    oss<<"Failed to load file "<<path<<": "<<SDL_GetError();
-	    this->message = oss.str();
-	}
-    };
-}
-
-namespace signal
-{
-    class AlreadyVisible:public GameSignal{};
-}
-
 #endif
