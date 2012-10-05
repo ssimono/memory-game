@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 	
 	do
 	{
-	    while(chuck.play()) chuck.getPoint();
+	    while(chuck.play()) chuck.inscreaseScore();
 	}while( !board.isFinished() );
     }
     catch(signal::UserQuitRequest) {}

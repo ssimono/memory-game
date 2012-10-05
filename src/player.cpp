@@ -6,7 +6,7 @@ Player::Player(Board* board)
     this->score = 0;
 }
 
-void Player::getPoint()
+void Player::inscreaseScore()
 {
     this->score++;
 }

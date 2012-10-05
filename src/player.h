@@ -10,7 +10,7 @@ class Player
 	
 	bool play();
 	
-	void getPoint();
+	void inscreaseScore();
 	
     private:
 	Board* board;
