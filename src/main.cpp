@@ -6,6 +6,7 @@
 #include "game_exception.h"
 #include "board.h"
 #include "player.h"
+#include "thread.h"
 
 // Main SDL_Surface
 SDL_Surface* screen;
@@ -48,6 +49,9 @@ int main(int argc, char** argv)
     
     initSDL();
     srand ( time(NULL) );
+    
+    Thread my_thread = Thread();
+    my_thread.start();
     
     try
     {
