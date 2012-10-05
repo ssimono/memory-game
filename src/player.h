@@ -12,6 +12,8 @@ class Player
 	
 	void inscreaseScore();
 	
+	int getScore();
+	
     private:
 	Board* board;
 	int score;

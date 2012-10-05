@@ -62,3 +62,8 @@ int Player::chooseSquare()
         }
     }
 }
+
+int Player::getScore()
+{
+    return this->score;
+}
