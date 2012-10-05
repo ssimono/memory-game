@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <time.h>
 #include <SDL/SDL.h>
 
@@ -12,6 +13,9 @@ SDL_Surface* screen;
 // Board dimensions
 const int nb_lines = 5;
 const int nb_columns = 4;
+
+// Number of players
+const int nb_players = 2;
 
 /**
  * Initialize SDL Window and video settings
@@ -48,12 +52,23 @@ int main(int argc, char** argv)
     try
     {
 	Board board(screen,nb_lines,nb_columns);
-    
-	Player chuck(&board);
+	vector<Player*> players;
+	
+	for(int i=0; i<nb_players; ++i) players.push_back(new Player(&board));
+	
+	std::vector<Player*>::iterator it = players.begin();
+	Player* current_player;
 	
 	do
 	{
-	    while(chuck.play()) chuck.inscreaseScore();
+	    current_player = (*it);
+	    while(current_player->play()) current_player->inscreaseScore();
+	    
+	    ++it;
+	    if( it == players.end() ) it = players.begin();
+	    
+	    cout<<"Change player"<<endl;
+	    
 	}while( !board.isFinished() );
     }
     catch(signal::UserQuitRequest) {}
