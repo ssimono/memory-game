@@ -18,12 +18,10 @@ namespace thread{
 	STOPPING,
 	STOPPED
     };
-        
-    int count_to_10(void* data);
 }
 
 /**
- * A class for managing threads
+ * A virtual class for managing threads
  */
 class Thread
 {
@@ -31,14 +29,23 @@ class Thread
 	Thread();
 	~Thread();
 	
-	void start();
+	virtual void start();
 	void stop();
 	thread::Status getStatus();
 	
-    private:
+    protected:
 	SDL_Thread* sdl_thread;
 	int (*function)(void *);
 	thread::Status status;
+	bool* flag;
+};
+
+/*
+ * Class to test my Thread class framework
+ */
+class CountTo10:public Thread
+{
+    public:CountTo10();
 };
 
 #endif
