@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <string>
-#include <sstream>
 
 #include "game_exception.h"
 #include "board.h"
@@ -8,11 +7,7 @@
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
 {
     // Throw an exception id the number of squares is not even
-    if(nb_lines&1 && nb_columns&1){
-        std::ostringstream oss;
-        oss<<"Board need an even number of squares, "<<nb_lines<<"x"<<nb_columns<<" will not work";
-        throw GameException(error::SquareNumberOdd, oss.str());
-    }
+    if(nb_lines&1 && nb_columns&1) throw error::SquareNumberOdd(nb_lines,nb_columns);
     
     this->screen = screen;
     this->nbLines = nb_lines;
@@ -60,9 +55,8 @@ int Board::flipSquareIn(int x, int y)
 
 void Board::hideVisibleSquares()
 {
-    if(this->tour != SECOND_TOUR)
-	throw GameException(error::TurnNotDone,
-			    std::string("Cannot flip squares out before second turn"));
+    // Squares can only be flipped out again after second tour
+    if(this->tour != SECOND_TOUR) throw error::TurnNotDone();
     
     Square* first = this->visible[0];
     Square* second = this->visible[1];

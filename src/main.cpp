@@ -61,7 +61,7 @@ int main(int argc, char** argv)
     {
 	SDL_FreeSurface(screen);
 	
-	cerr<<"[code #"<<ge.getId()<<"] "<<ge.getMessage()<<endl;
+	cerr<<"[Error] "<<ge.getMessage()<<endl;
 	cerr<<"Terminating"<<endl;
 	
 	return EXIT_FAILURE;

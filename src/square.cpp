@@ -1,5 +1,4 @@
 #include <string>
-#include <sstream>
 
 #include "game_exception.h"
 #include "square.h"
@@ -17,11 +16,7 @@ Square::Square(short id, short value, int position_x, int position_y)
     this->sdl_surface = SDL_LoadBMP( file_path.c_str() );
     
     // Throw an exception if the file is not correctly loaded
-    if(this->sdl_surface == NULL){
-        std::ostringstream oss;
-        oss<<"Failed to load file "<<file_path<<": "<<SDL_GetError();
-        throw GameException(error::CannotLoadFile, oss.str());
-    }
+    if(this->sdl_surface == NULL) throw error::CannotLoadFile(file_path);
     
     SDL_Rect rect;
     rect.x = position_x;

@@ -89,6 +89,23 @@ class Board
 	void cleanFirstSquares(int n);
 };
 
+namespace error
+{
+    class SquareNumberOdd:public GameException
+    {
+	public: SquareNumberOdd(int nb_lines, int nb_columns){
+	    std::ostringstream oss;
+	    oss<<"Board need an even number of squares, "<<nb_lines<<"x"<<nb_columns<<" will not work";
+	    this->message = oss.str();
+	}
+    };
+    
+    class TurnNotDone:public GameException
+    {
+	public: TurnNotDone():GameException(std::string("Cannot flip squares out before second turn")){};
+    };
+}
+
 namespace signal
 {
     class ClickedOutside:public GameSignal{};

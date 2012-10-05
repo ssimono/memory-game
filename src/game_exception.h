@@ -2,17 +2,7 @@
 #define GAME_EXCEPTION_H
 
 #include <string>
-
-namespace error
-{
-    enum ErrorId
-    {
-	UnknownError,
-	CannotLoadFile,		// Fail to load BMP file with SDL_LoadBMP function
-	SquareNumberOdd,	// Odd number of squares on the board
-	TurnNotDone		// Ask to flip squares out before second turn
-    };
-}
+#include <sstream>
 
 /**
  * Class used to handle exception through program process
@@ -20,23 +10,23 @@ namespace error
 class GameException
 {
     public:
-	GameException(error::ErrorId id, std::string message)
+	GameException()
 	{
-	    this->id = id;
+	    this->message = std::string("A game exception has occured");
+	}
+	GameException(std::string message)
+	{
 	    this->message = message;
 	}
 	
-	GameException(error::ErrorId id, char* message)
+	GameException(char* message)
 	{
-	    this->id = id;
 	    this->message = std::string(message);
 	}
 	
 	std::string getMessage() { return this->message;}
-	error::ErrorId getId() { return this->id;}
 	
-    private:
-	error::ErrorId id;
+    protected:
 	std::string message;
 };
 
@@ -44,10 +34,6 @@ class GameException
  * Unlike GameException, GameSignal instances are meant to be thrown as part
  * of the game workflow, they do not terminate the game
  */
-class GameSignal:public GameException
-{
-    public:
-	GameSignal() : GameException(error::UnknownError,std::string("")) {}
-};
+class GameSignal:public GameException{};
 
 #endif
