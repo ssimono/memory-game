@@ -1,6 +1,8 @@
 #ifndef GAME_EXCEPTION_H
 #define GAME_EXCEPTION_H
 
+#include <SDL/SDL.h>
+
 #include <string>
 #include <sstream>
 
