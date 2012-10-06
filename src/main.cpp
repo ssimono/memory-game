@@ -70,6 +70,8 @@ int main(int argc, char** argv)
 	    cout<<"Change player"<<endl;
 	    
 	}while( !board.isFinished() );
+	
+	for(it = players.begin(); it < players.end(); ++it) delete (*it);
     }
     catch(signal::UserQuitRequest) {}
     catch(GameException ge)
