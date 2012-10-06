@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     initSDL();
     srand ( time(NULL) );
     
-    Thread my_thread = CountTo10();
+    CountTo10 my_thread = CountTo10();
     my_thread.start();
     
     try
@@ -86,8 +86,10 @@ int main(int argc, char** argv)
 	return EXIT_FAILURE;
     }
     
-    SDL_FreeSurface(screen);
+    my_thread.stop();
     
+    SDL_FreeSurface(screen);
+
     return EXIT_SUCCESS;
 }
 
