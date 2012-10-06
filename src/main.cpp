@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     initSDL();
     srand ( time(NULL) );
     
-    Thread my_thread = Thread();
+    Thread my_thread = CountTo10();
     my_thread.start();
     
     try

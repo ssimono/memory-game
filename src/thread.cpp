@@ -44,6 +44,8 @@ void Thread::stop()
     this->status = thread::STOPPING;
     SDL_WaitThread(this->sdl_thread,NULL);
     this->status = thread::STOPPED;
+    
+    std::cout<<"A thread just stopped"<<endl;
 }
 
 // Child classes definitions:
