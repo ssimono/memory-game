@@ -14,16 +14,34 @@ namespace thread
 	}
 	return 0;
     }
+    
+    int watch_mouse_hover(void* data)
+    {
+	bool* flag = (bool*)(data);
+	
+	while(true)
+	{
+	    if( !(*flag) ) return 0;
+	    std::cout<<"I am still watching mouse"<<std::endl;
+	    SDL_Delay(2000);
+	}
+	return 0;
+    }
 }
 
-// Child classes definitions:
+// --------- Child classes definitions: ---------
 
-CountTo10::CountTo10()/*:Thread::Thread()*/
+CountTo10::CountTo10()
 {
     this->function = thread::count_to_10;
 }
 
-// virtual class thread definitions:
+WatchMouseHover::WatchMouseHover()
+{
+    this->function = thread::watch_mouse_hover;
+}
+
+// --------- virtual class thread definitions: ---------
 
 Thread::Thread()
 {

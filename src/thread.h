@@ -6,7 +6,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_thread.h>
 
-namespace thread{
+namespace thread
+{
     
     /**
      * Differents status a thread can have
@@ -18,6 +19,12 @@ namespace thread{
 	STOPPING,
 	STOPPED
     };
+    
+    /**
+     * Thread functions used by Thread class instances
+     */
+    int count_to_10(void* data);
+    int watch_mouse_hover(void* data);
 }
 
 /**
@@ -46,6 +53,11 @@ class Thread
 class CountTo10:public Thread
 {
     public:CountTo10();
+};
+
+class WatchMouseHover:public Thread
+{
+    public:WatchMouseHover();
 };
 
 #endif
