@@ -20,6 +20,8 @@ Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
     this->squares.reserve( (this->getNbSquares() + 1)*sizeof(Square) );
     
     this->fill();
+
+    this->selected = NULL;
 }
 
 Board::~Board()
@@ -49,7 +51,10 @@ int Board::flipSquareIn(int x, int y)
 	default:
 	    break;
     }
-    
+
+    // Set selected pointer to NULL so it won't get hide when on mouse leave
+    this->selected = NULL;
+
     return choice->getValue();
 }
 
@@ -107,6 +112,29 @@ SquarePosition Board::findSquare(int x, int y)
     pos.line = line;
     
     return pos;
+}
+
+void Board::handleHover(int x, int y)
+{
+    try
+    {
+	SquarePosition pos = this->findSquare(x,y);
+	Square* hover = this->squares[pos.line*this->nbColumns + pos.column];
+
+	if( hover == this->selected ) return;
+
+	hover->highlight(this->screen);
+	if( this->selected != NULL )
+	    this->selected->flipOut(this->screen);
+
+	this->selected = hover;
+    }
+    catch(signal::ClickedOutside)
+    {
+	if( this->selected != NULL)
+		this->selected->flipOut(this->screen);
+    }
+    catch(...){}
 }
 
 bool Board::isFinished()

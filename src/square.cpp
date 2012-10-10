@@ -66,3 +66,13 @@ void Square::markFound(SDL_Surface* screen)
     SDL_FillRect(screen, &this->rect, 0xff0000);
     SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
 }
+
+void Square::highlight(SDL_Surface* screen)
+{
+    if( this->status == HIDDEN )
+    {
+	SDL_FillRect(screen, &this->rect, 0xf0f000);
+	SDL_UpdateRect(screen, this->rect.x,this->rect.y,this->rect.w,this->rect.h);
+    }
+}
+

@@ -55,6 +55,12 @@ class Board
 	 */
 	SquarePosition findSquare(int x, int y);
 	
+	/**
+	 * Trigger hover style on square hovered by [x,y] cursor
+	 */
+	// IMPORTANT please merge this with a findSquare, with a provate method used by both!
+	void handleHover(int x, int y);
+	
 	/*
 	 * Return a boolean telling if all squares have been found
 	 */
@@ -75,6 +81,8 @@ class Board
 	SDL_Surface* screen;
 	
 	Square* visible[2];
+	Square* selected;
+
 	Tour tour;
 	
 	/**

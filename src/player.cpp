@@ -44,6 +44,9 @@ int Player::chooseSquare()
             case SDL_QUIT:
                 throw signal::UserQuitRequest();
                 break;
+	    case SDL_MOUSEMOTION:
+		this->board->handleHover(event.motion.x,event.motion.y);
+		break;
             case SDL_KEYDOWN:
                 throw signal::UserQuitRequest();
                 break;

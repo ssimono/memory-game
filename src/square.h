@@ -34,7 +34,8 @@ class Square
 	void flipIn(SDL_Surface* screen);
 	void flipOut(SDL_Surface* screen);
 	void markFound(SDL_Surface* screen);
-	
+	void highlight(SDL_Surface* screen);
+
     private:
 	short id;
 	short value;
