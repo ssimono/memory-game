@@ -1,10 +1,12 @@
 #ifndef GAME_EXCEPTION_H
 #define GAME_EXCEPTION_H
 
-#include <SDL/SDL.h>
-
 #include <string>
 #include <sstream>
+
+#include <SDL/SDL.h>
+
+#include "config.h"
 
 /**
  * Class used to handle exception through program process

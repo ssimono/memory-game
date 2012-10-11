@@ -3,6 +3,7 @@
 
 #include "game_exception.h"
 #include "board.h"
+#include "config.h"
 
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
 {

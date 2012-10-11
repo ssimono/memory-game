@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
+
 #include <SDL/SDL.h>
 
+#include "config.h"
 #include "game_exception.h"
 #include "board.h"
 #include "player.h"

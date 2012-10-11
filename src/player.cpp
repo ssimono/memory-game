@@ -1,4 +1,5 @@
 #include "player.h"
+#include "config.h"
 
 Player::Player(Board* board)
 {
