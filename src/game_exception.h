@@ -6,6 +6,8 @@
 #include <string>
 #include <sstream>
 
+#include "config.h"
+
 /**
  * Class used to handle exception through program process
  */

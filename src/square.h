@@ -5,9 +5,6 @@
 
 #include "game_exception.h"
 
-const int SQUARE_WIDTH  = 70;
-const int SQUARE_HEIGHT = 70;
-
 /**
  * Differents status a square can have
  */
