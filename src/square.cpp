@@ -76,3 +76,8 @@ void Square::highlight(SDL_Surface* screen)
     }
 }
 
+void Square::unHighlight(SDL_Surface* screen)
+{
+    if( this->status == HIDDEN ) this->flipOut(screen);
+}
+

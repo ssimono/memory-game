@@ -125,14 +125,14 @@ void Board::handleHover(int x, int y)
 
 	hover->highlight(this->screen);
 	if( this->selected != NULL )
-	    this->selected->flipOut(this->screen);
+	    this->selected->unHighlight(this->screen);
 
 	this->selected = hover;
     }
     catch(signal::ClickedOutside)
     {
 	if( this->selected != NULL)
-		this->selected->flipOut(this->screen);
+		this->selected->unHighlight(this->screen);
     }
     catch(...){}
 }
