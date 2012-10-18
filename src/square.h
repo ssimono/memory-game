@@ -3,6 +3,8 @@
 
 #include <SDL/SDL.h>
 
+#include "game_exception.h"
+
 /**
  * Differents status a square can have
  */
@@ -29,7 +31,9 @@ class Square
 	void flipIn(SDL_Surface* screen);
 	void flipOut(SDL_Surface* screen);
 	void markFound(SDL_Surface* screen);
-	
+	void highlight(SDL_Surface* screen);
+	void unHighlight(SDL_Surface* screen);
+
     private:
 	short id;
 	short value;
