@@ -8,7 +8,6 @@
 #include "game_exception.h"
 #include "board.h"
 #include "player.h"
-#include "thread.h"
 
 // Main SDL_Surface
 SDL_Surface* screen;
@@ -52,9 +51,6 @@ int main(int argc, char** argv)
     initSDL();
     srand ( time(NULL) );
     
-    CountTo10 my_thread = CountTo10();
-    my_thread.start();
-    
     try
     {
 	Board board(screen,nb_lines,nb_columns);
@@ -89,8 +85,6 @@ int main(int argc, char** argv)
 	
 	return EXIT_FAILURE;
     }
-    
-    my_thread.stop();
     
     SDL_FreeSurface(screen);
 

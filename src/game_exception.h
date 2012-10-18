@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 
+#include <SDL/SDL.h>
+
 #include "config.h"
 
 /**
