@@ -11,22 +11,16 @@ Building
 --------
 
 ### On GNU/Linux:
-To build the game you will need SDL developement library: [www.libsdl.org](http://www.libsdl.org). On debian-based distributions, a simple
-```
-sudo apt-get install libsdl1.2-dev
-```
+To build the game you will need SDL developement library: [www.libsdl.org](http://www.libsdl.org).
+On debian-based distributions, a simple
+`sudo apt-get install libsdl1.2-dev`
 should do the job.
-Then
-```
-make
-./memory-game
-```
+Then `make`
     
 ### On Windows:
 To build with ming32, you need SDL Library as well. Paste Include files into {include path}\SDL and lib files into {lib path}. Make sure you add these options for link editing:
-```
--lmingw32 -lSDLmain -lSDL
-```
+`-lmingw32 -lSDLmain -lSDL`
+
 To run the game, put the SDL's DLL file in the same directory as the built exe.
 
 About
