@@ -12,10 +12,6 @@
 // Main SDL_Surface
 SDL_Surface* screen;
 
-// Board dimensions
-const int nb_lines = 5;
-const int nb_columns = 4;
-
 // Number of players
 const int nb_players = 2;
 
@@ -30,8 +26,8 @@ void initSDL()
     }
     atexit(SDL_Quit);
     
-    int width = BOARD_ORIGIN_X + nb_columns * (SQUARE_WIDTH + SQUARE_MARGIN_RIGHT);
-    int height = BOARD_ORIGIN_Y + nb_lines * (SQUARE_HEIGHT + SQUARE_MARGIN_BOTTOM);
+    int width = BOARD_ORIGIN_X + NB_COLUMNS * (SQUARE_WIDTH + SQUARE_MARGIN_RIGHT);
+    int height = BOARD_ORIGIN_Y + NB_LINES * (SQUARE_HEIGHT + SQUARE_MARGIN_BOTTOM);
     
     screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE);
     if (screen == NULL) {
@@ -53,7 +49,7 @@ int main(int argc, char** argv)
     
     try
     {
-	Board board(screen,nb_lines,nb_columns);
+	Board board(screen,NB_LINES, NB_COLUMNS);
 	vector<Player*> players;
 	
 	for(int i=0; i<nb_players; ++i) players.push_back(new Player(&board));

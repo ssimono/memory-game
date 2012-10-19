@@ -1,6 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+const int NB_LINES		= 5;
+const int NB_COLUMNS		= 4;
+
 const int SQUARE_WIDTH		= 70;
 const int SQUARE_HEIGHT		= 70;
 const int SQUARE_MARGIN_RIGHT	= 5;
