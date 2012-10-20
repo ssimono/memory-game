@@ -83,6 +83,8 @@ int main(int argc, char** argv)
     }
     
     SDL_FreeSurface(screen);
+    
+    cout<<"Game terminated"<<endl;
 
     return EXIT_SUCCESS;
 }
