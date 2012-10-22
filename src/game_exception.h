@@ -66,6 +66,11 @@ namespace error
     {
 	public: TurnNotDone():GameException(std::string("Cannot flip squares out before second turn")){};
     };
+    
+    class NoPlayers:public GameException
+    {
+	public: NoPlayers():GameException(std::string("Cannot start the game without at least one player")){};
+    };
 }
 
 namespace signal
@@ -73,6 +78,7 @@ namespace signal
     class ClickedOutside:public GameSignal{};
     class UserQuitRequest:public GameSignal{};
     class AlreadyVisible:public GameSignal{};
+    class BoardComplete:public GameSignal{};
 }
 
 #endif

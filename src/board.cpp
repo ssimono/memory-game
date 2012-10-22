@@ -74,6 +74,8 @@ void Board::hideVisibleSquares()
 	second->markFound(s);
 	
 	this->nbSquaresFound += 2;
+	
+	if( this->isFinished() ) throw signal::BoardComplete();
     }
     else
     {

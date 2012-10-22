@@ -6,6 +6,7 @@
 
 #include "config.h"
 #include "game_exception.h"
+#include "game.h"
 #include "board.h"
 #include "player.h"
 
@@ -13,7 +14,7 @@
 SDL_Surface* screen;
 
 // Number of players
-const int nb_players = 2;
+const int nb_players = 1;
 
 /**
  * Initialize SDL Window and video settings
@@ -50,26 +51,11 @@ int main(int argc, char** argv)
     try
     {
 	Board board(screen,NB_LINES, NB_COLUMNS);
-	vector<Player*> players;
+	Game game(screen);
 	
-	for(int i=0; i<nb_players; ++i) players.push_back(new Player(&board));
+	for(int i=0; i<nb_players; ++i) game.addPlayer(new Player(&board));
 	
-	std::vector<Player*>::iterator it = players.begin();
-	Player* current_player;
-	
-	do
-	{
-	    current_player = (*it);
-	    while(current_player->play()) current_player->inscreaseScore();
-	    
-	    ++it;
-	    if( it == players.end() ) it = players.begin();
-	    
-	    cout<<"Change player"<<endl;
-	    
-	}while( !board.isFinished() );
-	
-	for(it = players.begin(); it < players.end(); ++it) delete (*it);
+	game.start();
     }
     catch(signal::UserQuitRequest) {}
     catch(GameException ge)
