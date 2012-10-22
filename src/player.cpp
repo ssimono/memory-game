@@ -1,3 +1,4 @@
+#include <sstream>
 #include "player.h"
 #include "config.h"
 
@@ -5,6 +6,13 @@ Player::Player(Board* board)
 {
     this->board = board;
     this->score = 0;
+    this->name = std::string("Player");
+    
+    static int playerCount = 0;
+    
+    std::ostringstream oss;
+    oss<<"Player #"<<++playerCount;
+    this->name = oss.str();
 }
 
 void Player::inscreaseScore()
@@ -70,4 +78,9 @@ int Player::chooseSquare()
 int Player::getScore()
 {
     return this->score;
+}
+
+std::string Player::getName()
+{
+    return this->name;
 }

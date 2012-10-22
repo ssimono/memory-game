@@ -14,7 +14,7 @@
 SDL_Surface* screen;
 
 // Number of players
-const int nb_players = 1;
+const int nb_players = 3;
 
 /**
  * Initialize SDL Window and video settings
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
     
     SDL_FreeSurface(screen);
     
-    cout<<"Game terminated"<<endl;
+    cout<<"\nDone"<<endl;
 
     return EXIT_SUCCESS;
 }

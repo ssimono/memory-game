@@ -53,7 +53,7 @@ void Game::start()
 	int i=0;
 	for(PlayerList::iterator it = this->players.begin();
 	it != this->players.end(); ++it){
-	    cout<<"Player "<<++i<<":\t"<<(*it)->getScore()<<" points"<<endl;
+	    cout<<(*it)->getName()<<":\t"<<(*it)->getScore()<<" points"<<endl;
 	}
     }
 }
