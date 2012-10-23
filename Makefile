@@ -1,5 +1,5 @@
 CPP  = g++
-CFLAGS = -Wall `sdl-config --cflags`
+CFLAGS = -Wall `sdl-config --cflags` -lSDL_ttf
 LIBS = `sdl-config --libs`
 COMPILE = $(CPP)
 

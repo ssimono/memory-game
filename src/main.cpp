@@ -3,6 +3,7 @@
 #include <time.h>
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 
 #include "config.h"
 #include "game_exception.h"
@@ -41,6 +42,12 @@ void initSDL()
     }
     SDL_WM_SetCaption("Memory game", NULL);
     
+    if(TTF_Init() < 0) {
+	std::cerr<<"Cannot initialize SDL_TTF"<<TTF_GetError()<<endl;
+	exit(EXIT_FAILURE);
+    }
+    atexit(TTF_Quit);
+	
     SDL_FillRect(screen, NULL, 0xdfdfdf);
     SDL_UpdateRect(screen, 0,0,width,height);
 }
@@ -48,6 +55,8 @@ void initSDL()
 int main(int argc, char** argv)
 {
     using namespace std;
+    
+    cout<<"Starting Memory game"<<endl;
     
     initSDL();
     srand ( time(NULL) );
@@ -76,7 +85,7 @@ int main(int argc, char** argv)
     
     cout<<"\nDone"<<endl;
 
-    return EXIT_SUCCESS;
+    exit(EXIT_SUCCESS);
 }
 
 int get_screen_height()
