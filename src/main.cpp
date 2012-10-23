@@ -16,6 +16,10 @@ SDL_Surface* screen;
 // Number of players
 const int nb_players = 3;
 
+//Return screen dimensions according to graphical constants (see config.c)
+int get_screen_height();
+int get_screen_width();
+
 /**
  * Initialize SDL Window and video settings
  */
@@ -27,8 +31,8 @@ void initSDL()
     }
     atexit(SDL_Quit);
     
-    int width = BOARD_ORIGIN_X + NB_COLUMNS * (SQUARE_WIDTH + SQUARE_MARGIN_RIGHT);
-    int height = BOARD_ORIGIN_Y + NB_LINES * (SQUARE_HEIGHT + SQUARE_MARGIN_BOTTOM);
+    int width = get_screen_width();
+    int height = get_screen_height();
     
     screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE);
     if (screen == NULL) {
@@ -73,5 +77,18 @@ int main(int argc, char** argv)
     cout<<"\nDone"<<endl;
 
     return EXIT_SUCCESS;
+}
+
+int get_screen_height()
+{
+    return max(BOARD_ORIGIN_Y + NB_LINES * (SQUARE_HEIGHT + SQUARE_MARGIN_BOTTOM),
+	       nb_players * SCORE_PANEL_HEIGHT);
+}
+
+int get_screen_width()
+{
+    return	BOARD_ORIGIN_X +
+		NB_COLUMNS * (SQUARE_WIDTH + SQUARE_MARGIN_RIGHT) +
+		SCORE_PANEL_WIDTH;
 }
 
