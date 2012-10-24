@@ -21,6 +21,8 @@ class Game
 	int getNbPlayers();
 	
     private:
+	void updateScorePanel();
+	
 	PlayerList players;
 	PlayerList::iterator currentPlayer;
 	
