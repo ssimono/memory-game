@@ -34,4 +34,4 @@ This little game is intended to have fun, train your memory skills and obviously
 Thanks
 ------
 
- **Matthew Welch** for the *Hit The Road* font I used. See [http://www.squaregear.net/fonts/](http://www.squaregear.net/fonts/).
+ **Vernon Adams** for the *Nobile* font I used. See [http://www.1001fonts.com/nobile-font.html](http://www.1001fonts.com/nobile-font.html).
