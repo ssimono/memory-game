@@ -41,7 +41,8 @@ void Game::updateScorePanel()
     score_panel.y = BOARD_ORIGIN_Y;
     score_panel.w = SCORE_PANEL_WIDTH;
     score_panel.h = this->getNbPlayers() * SCORE_PANEL_HEIGHT;
-        
+    
+    SDL_FillRect(screen, &score_panel, BACKGROUND_COLOR);
     SDL_Color black={0,0,0};
     SDL_Color grey ={0xb8,0xb8,0xb8};
     

@@ -48,7 +48,7 @@ void initSDL()
     }
     atexit(TTF_Quit);
 	
-    SDL_FillRect(screen, NULL, 0xdfdfdf);
+    SDL_FillRect(screen, NULL, BACKGROUND_COLOR);
     SDL_UpdateRect(screen, 0,0,width,height);
 }
 

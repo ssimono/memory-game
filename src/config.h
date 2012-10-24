@@ -19,6 +19,8 @@ const int HIDDEN_SQUARE_COLOR	= 0x27863f;
 const int HOVER_SQUARE_COLOR	= 0x37964f;
 const int FOUND_SQUARE_COLOR	= 0xff0000;
 
+const int BACKGROUND_COLOR	= 0xdfdfdf;
+
 const int SHOW_DURATION		= 1500;
 
 #endif
