@@ -84,3 +84,9 @@ std::string Player::getName()
 {
     return this->name;
 }
+
+Computer::Computer(Board* board):Player(board)
+{
+    int pos = this->name.find('#') - 1;
+    this->name.replace(0,pos,"Cpu");
+}
