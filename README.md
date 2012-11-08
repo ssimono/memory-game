@@ -12,8 +12,10 @@ Building
 
 ### On GNU/Linux:
 To build the game you will need:
+
 * SDL developement library: [www.libsdl.org](http://www.libsdl.org)
-* SDL_ttf development library [http://www.libsdl.org/projects/SDL_ttf](http://www.libsdl.org/projects/SDL_ttf)
+* SDL_ttf development library [http://www.libsdl.org/projects/SDL_ttf](http://www.libsdl.org/projects/SDL_ttf).
+
 On debian-based distributions, a simple
 `sudo apt-get install libsdl1.2-dev libsdl-ttf2.0-dev`
 should do the job.
