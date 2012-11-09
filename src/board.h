@@ -52,7 +52,7 @@ class Board
 	/**
 	 * Trigger hover style on square hovered by [x,y] cursor
 	 */
-	// IMPORTANT please merge this with a findSquare, with a provate method used by both!
+	// IMPORTANT please merge this with a findSquare, with a private method used by both!
 	void handleHover(int x, int y);
 	
 	/*
@@ -64,7 +64,17 @@ class Board
 	 * Return the number of squares on the board
 	 */
 	int getNbSquares();
+
+	/**
+	 * Return the number of lines on the board
+	 */
+	int getNbLines();
 	
+	/**
+	 * Return the number of columns on the board
+	 */
+	int getNbColumns();
+
     private:
 	int nbLines;
 	int nbColumns;

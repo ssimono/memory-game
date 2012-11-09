@@ -150,6 +150,16 @@ int Board::getNbSquares()
     return this->nbLines * this->nbColumns;
 }
 
+int Board::getNbLines()
+{
+    return this->nbLines;
+}
+
+int Board::getNbColumns()
+{
+    return this->nbColumns;
+}
+
 void Board::fill()
 {
     int nb_squares = this->getNbSquares();
