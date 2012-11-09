@@ -1,3 +1,4 @@
+#include <iostream>
 #include <sstream>
 #include "player.h"
 #include "config.h"
@@ -85,8 +86,38 @@ std::string Player::getName()
     return this->name;
 }
 
+//-----------------------------------------------------------------------------
+
 Computer::Computer(Board* board):Player(board)
 {
     int pos = this->name.find('#') - 1;
     this->name.replace(0,pos,"Cpu");
 }
+
+//-----------------------------------------------------------------------------
+
+DumbComputer::DumbComputer(Board* board):Computer(board){}
+
+bool DumbComputer::play()
+{
+    SDL_Delay(500);
+    return Computer::play();
+}
+
+int DumbComputer::chooseSquare()
+{
+    while(true)
+    {
+	try
+	{
+	    int col = rand()%this->board->getNbColumns();
+	    int line = rand()%this->board->getNbLines();
+	 
+	    int value = this->board->flipSquareIn(col,line);
+	    SDL_Delay(600);
+	    return value;
+	}
+	catch(signal::AlreadyVisible){ continue; }
+    }
+}
+

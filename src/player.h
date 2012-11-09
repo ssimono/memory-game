@@ -10,7 +10,7 @@ class Player
     public:
 	Player(Board* board);
 	
-	bool play();
+	virtual bool play();
 	void inscreaseScore();
 	
 	int getScore();
@@ -20,19 +20,24 @@ class Player
 	Board* board;
 	int score;
 	string name;
-		
-    private:
-	/**
-	 * Let the human user choose a square by clicking on it
-	 * @return value of the chosen square
-	 */
-	int chooseSquare();
+	
+	virtual int chooseSquare();
 };
 
 class Computer:public Player
 {
     public:
 	Computer(Board* board);
+};
+
+class DumbComputer:public Computer
+{
+    public:
+	DumbComputer(Board* board);
+	bool play();
+    
+    protected:
+	int chooseSquare();
 };
 
 #endif

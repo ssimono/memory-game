@@ -66,7 +66,7 @@ int main(int argc, char** argv)
 	Board board(screen,NB_LINES, NB_COLUMNS);
 	Game game(screen);
 	
-	for(int i=0; i<nb_players; ++i) game.addPlayer(i%2==0? new Player(&board) : new Computer(&board));
+	for(int i=0; i<nb_players; ++i) game.addPlayer(i%2==0? new Player(&board) : new DumbComputer(&board));
 	
 	game.start();
     }
