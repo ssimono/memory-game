@@ -106,8 +106,15 @@ bool DumbComputer::play()
 
 int DumbComputer::chooseSquare()
 {
+    SDL_Event event;
+
     while(true)
     {
+	// Makes sure user did not ask to quit
+	while(SDL_PollEvent(&event))
+	    if(event.type == SDL_QUIT || event.type == SDL_KEYDOWN)
+		throw signal::UserQuitRequest();
+
 	try
 	{
 	    int col = rand()%this->board->getNbColumns();
