@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
+#include <argp.h>
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
@@ -10,6 +11,11 @@
 #include "game.h"
 #include "board.h"
 #include "player.h"
+
+// Basic information for command line invocation
+const char *argp_program_version = "Memory Game v1.0";
+const char *argp_program_bug_address = "<simon@sa-web.fr>";
+static char doc[] = "Memory Game - A simple memory game for entertainment";
 
 // Main SDL_Surface
 SDL_Surface* screen;
@@ -55,7 +61,10 @@ void initSDL()
 int main(int argc, char** argv)
 {
     using namespace std;
-    
+
+    static struct argp argp = { 0, 0, 0, doc };
+    argp_parse (&argp, argc, argv, 0, 0, 0);
+
     cout<<"Starting Memory game"<<endl;
     
     initSDL();
@@ -83,7 +92,7 @@ int main(int argc, char** argv)
     
     SDL_FreeSurface(screen);
     
-    cout<<"\nDone"<<endl;
+    cout<<"Done"<<endl;
 
     exit(EXIT_SUCCESS);
 }
