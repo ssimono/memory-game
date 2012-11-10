@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <time.h>
 #include <argp.h>
 
@@ -12,51 +11,32 @@
 #include "board.h"
 #include "player.h"
 
-// Basic information for command line invocation
+/**
+ * Basic information for command line invocation
+ */
 const char *argp_program_version = "Memory Game v1.0";
 const char *argp_program_bug_address = "<simon@sa-web.fr>";
 static char doc[] = "Memory Game - A simple memory game for entertainment";
 
-// Main SDL_Surface
+/**
+ * Main SDL_Surface
+ */
 SDL_Surface* screen;
 
 // Number of players
 const int nb_players = 3;
 
-//Return screen dimensions according to graphical constants (see config.c)
+/**
+ * Return screen dimensions according to graphical constants (see config.h)
+ */
 int get_screen_height();
 int get_screen_width();
 
 /**
  * Initialize SDL Window and video settings
  */
-void initSDL()
-{
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cerr<<"Error at initializing SDL"<<SDL_GetError()<<'\n';
-        exit(EXIT_FAILURE);
-    }
-    atexit(SDL_Quit);
-    
-    int width = get_screen_width();
-    int height = get_screen_height();
-    
-    screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE);
-    if (screen == NULL) {
-        std::cerr<<"Cannot initialize graphic mode"<<SDL_GetError()<<'\n';
-        exit(EXIT_FAILURE);
-    }
-    SDL_WM_SetCaption("Memory game", NULL);
-    
-    if(TTF_Init() < 0) {
-	std::cerr<<"Cannot initialize SDL_TTF"<<TTF_GetError()<<endl;
-	exit(EXIT_FAILURE);
-    }
-    atexit(TTF_Quit);
-	
-    SDL_FillRect(screen, NULL, BACKGROUND_COLOR);
-    SDL_UpdateRect(screen, 0,0,width,height);
-}
+void initSDL();
+
 
 int main(int argc, char** argv)
 {
@@ -95,6 +75,34 @@ int main(int argc, char** argv)
     cout<<"Done"<<endl;
 
     exit(EXIT_SUCCESS);
+}
+
+void initSDL()
+{
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cerr<<"Error at initializing SDL"<<SDL_GetError()<<'\n';
+        exit(EXIT_FAILURE);
+    }
+    atexit(SDL_Quit);
+    
+    int width = get_screen_width();
+    int height = get_screen_height();
+    
+    screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE);
+    if (screen == NULL) {
+        std::cerr<<"Cannot initialize graphic mode"<<SDL_GetError()<<'\n';
+        exit(EXIT_FAILURE);
+    }
+    SDL_WM_SetCaption("Memory game", NULL);
+    
+    if(TTF_Init() < 0) {
+	std::cerr<<"Cannot initialize SDL_TTF"<<TTF_GetError()<<endl;
+	exit(EXIT_FAILURE);
+    }
+    atexit(TTF_Quit);
+	
+    SDL_FillRect(screen, NULL, BACKGROUND_COLOR);
+    SDL_UpdateRect(screen, 0,0,width,height);
 }
 
 int get_screen_height()
