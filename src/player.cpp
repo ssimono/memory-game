@@ -3,17 +3,24 @@
 #include "player.h"
 #include "config.h"
 
-Player::Player(Board* board)
+static int playerCount = 0;
+
+Player::Player(Board* board, const char* name)
 {
+    using namespace std;
+
+    playerCount++;
     this->board = board;
     this->score = 0;
-    this->name = std::string("Player");
-    
-    static int playerCount = 0;
-    
-    std::ostringstream oss;
-    oss<<"Player #"<<++playerCount;
-    this->name = oss.str();
+
+    this->name = string(name);
+
+    if(!this->name.size())
+    {
+	ostringstream oss;
+	oss<<"Player #"<<playerCount;
+	this->name = oss.str();
+    }
 }
 
 void Player::inscreaseScore()
@@ -87,12 +94,8 @@ std::string Player::getName()
 }
 
 //-----------------------------------------------------------------------------
-
-Computer::Computer(Board* board):Player(board)
-{
-    int pos = this->name.find('#') - 1;
-    this->name.replace(0,pos,"Cpu");
-}
+Computer::Computer(Board* board, const char* name)
+:Player(board,name){}
 
 //-----------------------------------------------------------------------------
 

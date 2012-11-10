@@ -8,7 +8,7 @@ using namespace std;
 class Player
 {
     public:
-	Player(Board* board);
+	Player(Board* board, const char* name="");
 	
 	virtual bool play();
 	void inscreaseScore();
@@ -27,7 +27,7 @@ class Player
 class Computer:public Player
 {
     public:
-	Computer(Board* board);
+	Computer(Board* board, const char* name="");
 };
 
 class DumbComputer:public Computer
