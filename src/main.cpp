@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <argp.h>
+#include <regex.h>
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
@@ -11,12 +12,7 @@
 #include "board.h"
 #include "player.h"
 
-/**
- * Basic information for command line invocation
- */
-const char *argp_program_version = "Memory Game v1.0";
-const char *argp_program_bug_address = "<simon@sa-web.fr>";
-static char doc[] = "Memory Game - A simple memory game for entertainment";
+using namespace std;
 
 /**
  * Main SDL_Surface
@@ -28,12 +24,45 @@ SDL_Surface* screen;
  */
 void initSDL();
 
+/**
+ * Basic information for command line invocation
+ */
+const char* argp_program_version = "Memory Game v1.0";
+const char* argp_program_bug_address = "<simon@sa-web.fr>";
+static char doc[] = "Memory Game - A simple memory game for entertainment";
 
+/**
+ * Command line options definition
+ */
+static struct argp_option options[] =
+{
+    {	// String used to define type and number of players
+	"players",'p',
+	"PLAYERS_LIST",
+	0,
+	"Specify type and number of players, default to \"HC\""
+    },
+    { 0 }
+};
+
+/**
+ * Option storage variables
+ */
+string players_list = string("HC");
+
+/**
+ * Command line options parser
+ * Will be called directly by argp
+ */
+static error_t parse_opt (int key, char *arg, struct argp_state *state);
+
+//-----------------------------------------------------------------------------
+//  MAIN FUNCTION
+//-----------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
-    using namespace std;
 
-    static struct argp argp = { 0, 0, 0, doc };
+    static struct argp argp = { options, parse_opt, 0, doc };
     argp_parse (&argp, argc, argv, 0, 0, 0);
 
     cout<<"Starting Memory game"<<endl;
@@ -46,7 +75,18 @@ int main(int argc, char** argv)
 	Board board(screen,NB_LINES, NB_COLUMNS);
 	Game game(screen);
 	
-	for(int i=0; i<nb_players; ++i) game.addPlayer(i%2==0? new Player(&board) : new DumbComputer(&board));
+	int T = players_list.size();
+	
+	for(int i=0; i<T; ++i) switch(players_list[i])
+	{
+	    case 'H':
+		game.addPlayer(new Player(&board));
+		break;
+	    case 'C':
+		game.addPlayer(new DumbComputer(&board));
+		break;
+	    default:break;
+	}
 	
 	game.start();
     }
@@ -67,6 +107,9 @@ int main(int argc, char** argv)
 
     exit(EXIT_SUCCESS);
 }
+//-----------------------------------------------------------------------------
+//  END OF MAIN
+//-----------------------------------------------------------------------------
 
 void initSDL()
 {
@@ -77,7 +120,7 @@ void initSDL()
     atexit(SDL_Quit);
     
     int width = get_screen_width();
-    int height = get_screen_height();
+    int height = get_screen_height(players_list.size());
     
     screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE);
     if (screen == NULL) {
@@ -96,3 +139,41 @@ void initSDL()
     SDL_UpdateRect(screen, 0,0,width,height);
 }
 
+static error_t parse_opt (int key, char *arg, struct argp_state *state)
+{
+    switch (key)
+    {
+	case 'p': // Players list
+	{
+	    // Validation regular expression
+	    const char* str_regex = "^(H|C){1,6}$";
+	    
+	    // Regular expression structure
+	    regex_t preg;
+	    
+	    // Compilation
+	    regcomp (&preg, str_regex, REG_NOSUB|REG_EXTENDED);
+
+	    // Test
+	    if( regexec(&preg, arg, 0, NULL, 0) == REG_NOMATCH )
+	    {
+		cerr<<"Warning: \""<<arg<<"\" is not a valid players list string."<<endl;
+		cerr<<"Default value \"HC\" has been used instead"<<endl;
+	    }
+	    else players_list = string(arg);
+
+	    // Free preg struture
+	    regfree (&preg);
+
+	    break;
+	}
+	case ARGP_KEY_ARG:
+	    // Too many arguments, redirect to usage
+	    if (state->arg_num >= 1) argp_usage (state);
+	    break;
+	
+	default:
+	    return ARGP_ERR_UNKNOWN;
+    }
+    return 0;
+}
