@@ -23,4 +23,19 @@ const int BACKGROUND_COLOR	= 0xdfdfdf;
 
 const int SHOW_DURATION		= 1500;
 
+const int nb_players = 3;
+
+static int get_screen_height()
+{
+    return std::max(BOARD_ORIGIN_Y + NB_LINES * (SQUARE_HEIGHT + SQUARE_MARGIN_BOTTOM),
+	       nb_players * SCORE_PANEL_HEIGHT);
+}
+
+static int get_screen_width()
+{
+    return	BOARD_ORIGIN_X +
+		NB_COLUMNS * (SQUARE_WIDTH + SQUARE_MARGIN_RIGHT) +
+		SCORE_PANEL_WIDTH;
+}
+
 #endif

@@ -23,15 +23,6 @@ static char doc[] = "Memory Game - A simple memory game for entertainment";
  */
 SDL_Surface* screen;
 
-// Number of players
-const int nb_players = 3;
-
-/**
- * Return screen dimensions according to graphical constants (see config.h)
- */
-int get_screen_height();
-int get_screen_width();
-
 /**
  * Initialize SDL Window and video settings
  */
@@ -103,18 +94,5 @@ void initSDL()
 	
     SDL_FillRect(screen, NULL, BACKGROUND_COLOR);
     SDL_UpdateRect(screen, 0,0,width,height);
-}
-
-int get_screen_height()
-{
-    return max(BOARD_ORIGIN_Y + NB_LINES * (SQUARE_HEIGHT + SQUARE_MARGIN_BOTTOM),
-	       nb_players * SCORE_PANEL_HEIGHT);
-}
-
-int get_screen_width()
-{
-    return	BOARD_ORIGIN_X +
-		NB_COLUMNS * (SQUARE_WIDTH + SQUARE_MARGIN_RIGHT) +
-		SCORE_PANEL_WIDTH;
 }
 
