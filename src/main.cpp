@@ -29,7 +29,14 @@ void initSDL();
  */
 const char* argp_program_version = "Memory Game v1.0";
 const char* argp_program_bug_address = "<simon@sa-web.fr>";
-static char doc[] = "Memory Game - A simple memory game for entertainment";
+static char doc[] =
+"Memory Game - A simple memory game for entertainment\v\
+DESCRIPTION\n\
+\t--players, -p:\n\
+\t\tValue of this option is a string matching (H|C){1,6}\n\
+\t\tH adds a human player\n\
+\t\tC adds a computer A.I\n\
+\t\te.g. -p HCHC will launch a four players game with two humans and 2 A.I";
 
 /**
  * Command line options definition
