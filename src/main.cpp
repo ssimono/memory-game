@@ -24,6 +24,11 @@ SDL_Surface* screen;
  */
 void initSDL();
 
+/*
+ * Time during which cards are left shown
+ */
+int show_duration;
+
 /**
  * Basic information for command line invocation
  */
@@ -71,6 +76,8 @@ int main(int argc, char** argv)
 
     static struct argp argp = { options, parse_opt, 0, doc };
     argp_parse (&argp, argc, argv, 0, 0, 0);
+
+    show_duration = 1500;
 
     cout<<"Starting Memory game"<<endl;
     

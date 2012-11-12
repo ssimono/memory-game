@@ -101,14 +101,11 @@ Computer::Computer(Board* board, const char* name)
 
 DumbComputer::DumbComputer(Board* board):Computer(board){}
 
-bool DumbComputer::play()
-{
-    SDL_Delay(500);
-    return Computer::play();
-}
-
 int DumbComputer::chooseSquare()
 {
+    extern int show_duration;
+    SDL_Delay(show_duration/3);
+
     SDL_Event event;
 
     while(true)
@@ -124,7 +121,7 @@ int DumbComputer::chooseSquare()
 	    int line = rand()%this->board->getNbLines();
 	 
 	    int value = this->board->flipSquareIn(col,line);
-	    SDL_Delay(600);
+
 	    return value;
 	}
 	catch(signal::AlreadyVisible){ continue; }

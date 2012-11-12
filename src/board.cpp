@@ -47,7 +47,9 @@ int Board::flipSquareIn(int x, int y)
 	    break;
 	case SECOND_TOUR:
 	    this->visible[1] = choice;
-	    SDL_Delay(SHOW_DURATION);
+
+	    extern int show_duration;
+	    SDL_Delay(show_duration);
 	    break;
 	default:
 	    break;

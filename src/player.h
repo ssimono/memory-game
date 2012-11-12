@@ -10,7 +10,7 @@ class Player
     public:
 	Player(Board* board, const char* name="");
 	
-	virtual bool play();
+	bool play();
 	void inscreaseScore();
 	
 	int getScore();
@@ -34,7 +34,6 @@ class DumbComputer:public Computer
 {
     public:
 	DumbComputer(Board* board);
-	bool play();
     
     protected:
 	int chooseSquare();

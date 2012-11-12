@@ -21,14 +21,18 @@ const int FOUND_SQUARE_COLOR	= 0xff0000;
 
 const int BACKGROUND_COLOR	= 0xdfdfdf;
 
-const int SHOW_DURATION		= 1500;
-
+/*
+ * Return screen height in pixels
+ */
 static int get_screen_height(int nb_players)
 {
     return std::max(BOARD_ORIGIN_Y + NB_LINES * (SQUARE_HEIGHT + SQUARE_MARGIN_BOTTOM),
 	       nb_players * SCORE_PANEL_HEIGHT);
 }
 
+/*
+ * Return screen width in pixels
+ */
 static int get_screen_width()
 {
     return	BOARD_ORIGIN_X +
