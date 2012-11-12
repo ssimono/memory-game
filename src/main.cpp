@@ -24,11 +24,6 @@ SDL_Surface* screen;
  */
 void initSDL();
 
-/*
- * Time during which cards are left shown
- */
-int show_duration;
-
 /**
  * Basic information for command line invocation
  */
@@ -54,6 +49,12 @@ static struct argp_option options[] =
 	0,
 	"Specify type and number of players, default to \"HC\""
     },
+    {	// Integer representing milliseconds if showing time
+	"show-duration",'s',
+	"SHOW_DURATION",
+	0,
+	"Specify time in milliseconds during which cards are shown"
+    },
     { 0 }
 };
 
@@ -61,6 +62,7 @@ static struct argp_option options[] =
  * Option storage variables
  */
 string players_list = string("HC");
+int show_duration   = 1500;
 
 /**
  * Command line options parser
@@ -76,8 +78,6 @@ int main(int argc, char** argv)
 
     static struct argp argp = { options, parse_opt, 0, doc };
     argp_parse (&argp, argc, argv, 0, 0, 0);
-
-    show_duration = 1500;
 
     cout<<"Starting Memory game"<<endl;
     
@@ -175,6 +175,31 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
 		cerr<<"Default value \"HC\" has been used instead"<<endl;
 	    }
 	    else players_list = string(arg);
+
+	    // Free preg struture
+	    regfree (&preg);
+
+	    break;
+	}
+	case 's': // Showing time
+	{
+	    // Validation regular expression
+	    const char* str_regex = "^[[:digit:]]{1,4}$";
+	    
+	    // Regular expression structure
+	    regex_t preg;
+	    
+	    // Compilation
+	    regcomp (&preg, str_regex, REG_NOSUB|REG_EXTENDED);
+
+	    // Test
+	    if( regexec(&preg, arg, 0, NULL, 0) == REG_NOMATCH )
+	    {
+		cerr<<"Warning: \""<<arg<<"\" is not a valid showing time number"<<endl;
+		cerr<<"Must be an integer between 1 and 9999 milliseconds"<<endl;
+		cerr<<"Default value 1500 has been used instead"<<endl;
+	    }
+	    else show_duration = atoi(arg);
 
 	    // Free preg struture
 	    regfree (&preg);
