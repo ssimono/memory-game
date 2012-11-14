@@ -31,7 +31,13 @@ DESCRIPTION\n\
 \t\tValue of this option is a string matching (H|C){1,6}\n\
 \t\tH adds a human player\n\
 \t\tC adds a computer A.I\n\
-\t\te.g. -p HCHC will launch a four players game with two humans and 2 A.I";
+\t\te.g. -p HCHC will launch a four players game with two humans and two A.I\n\
+\t--show-duration, -s:\n\
+\t\tValue of this option is an interger between 0 and 9999\n\
+\t\tThis corresponds to the number of milliseconds during which cards\n\
+\t\tare left shown.\n\
+\t\te.g. -s 1000 will make cards stay shown for 1 second at each turn";
+
 
 /**
  * Command line options definition
@@ -48,7 +54,7 @@ static struct argp_option options[] =
 	"show-duration",'s',
 	"SHOW_DURATION",
 	0,
-	"Specify time in milliseconds during which cards are shown"
+	"Specify time during which cards are shown, default to 1500"
     },
     { 0 }
 };
