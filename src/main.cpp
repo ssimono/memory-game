@@ -20,16 +20,6 @@ using namespace std;
 Settings settings;
 
 /**
- * Main SDL_Surface
- */
-SDL_Surface* screen;
-
-/**
- * Initialize SDL Window and video settings
- */
-void initSDL();
-
-/**
  * Basic information for command line invocation
  */
 const char* argp_program_version = "Memory Game v1.0";
@@ -69,29 +59,45 @@ static struct argp_option options[] =
  */
 static error_t parse_opt (int key, char *arg, struct argp_state *state);
 
+/**
+ * Main SDL_Surface
+ */
+SDL_Surface* screen;
+
+/**
+ * Initialize SDL Window and video settings
+ */
+void initSDL();
+
 //-----------------------------------------------------------------------------
 //  MAIN FUNCTION
 //-----------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
+    // Set default settings values
     settings.players_list = string("HC");
     settings.show_duration = 1500;
-
+    
+    // Parse arguments and set new settings values if needed
     static struct argp argp = { options, parse_opt, 0, doc };
     argp_parse (&argp, argc, argv, 0, 0, 0);
-
+    
     cout<<"Starting Memory game"<<endl;
     
+    // Initialize window and video settings
     initSDL();
+
+    // Initialize random number generator
     srand ( time(NULL) );
     
     try
     {
+	// Declare Board and Game objects
 	Board board(screen,NB_LINES, NB_COLUMNS);
 	Game game(screen);
 	
+	// Generate players according to players_list string
 	int T = settings.players_list.size();
-	
 	for(int i=0; i<T; ++i) switch(settings.players_list[i])
 	{
 	    case 'H':
@@ -103,6 +109,7 @@ int main(int argc, char** argv)
 	    default:break;
 	}
 	
+	// Start the game
 	game.start();
     }
     catch(signal::UserQuitRequest) {}
@@ -115,7 +122,8 @@ int main(int argc, char** argv)
 	
 	return EXIT_FAILURE;
     }
-    
+   
+    // Free screen allocated memory
     SDL_FreeSurface(screen);
     
     cout<<"Done"<<endl;
