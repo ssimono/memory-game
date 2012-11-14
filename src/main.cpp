@@ -15,6 +15,11 @@
 using namespace std;
 
 /**
+ * settings set at runtime
+ */
+Settings settings;
+
+/**
  * Main SDL_Surface
  */
 SDL_Surface* screen;
@@ -59,12 +64,6 @@ static struct argp_option options[] =
 };
 
 /**
- * Option storage variables
- */
-string players_list = string("HC");
-int show_duration   = 1500;
-
-/**
  * Command line options parser
  * Will be called directly by argp
  */
@@ -75,6 +74,8 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state);
 //-----------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
+    settings.players_list = string("HC");
+    settings.show_duration = 1500;
 
     static struct argp argp = { options, parse_opt, 0, doc };
     argp_parse (&argp, argc, argv, 0, 0, 0);
@@ -89,9 +90,9 @@ int main(int argc, char** argv)
 	Board board(screen,NB_LINES, NB_COLUMNS);
 	Game game(screen);
 	
-	int T = players_list.size();
+	int T = settings.players_list.size();
 	
-	for(int i=0; i<T; ++i) switch(players_list[i])
+	for(int i=0; i<T; ++i) switch(settings.players_list[i])
 	{
 	    case 'H':
 		game.addPlayer(new Player(&board));
@@ -134,7 +135,7 @@ void initSDL()
     atexit(SDL_Quit);
     
     int width = get_screen_width();
-    int height = get_screen_height(players_list.size());
+    int height = get_screen_height(settings.players_list.size());
     
     screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE);
     if (screen == NULL) {
@@ -174,7 +175,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
 		cerr<<"Warning: \""<<arg<<"\" is not a valid players list string."<<endl;
 		cerr<<"Default value \"HC\" has been used instead"<<endl;
 	    }
-	    else players_list = string(arg);
+	    else settings.players_list = string(arg);
 
 	    // Free preg struture
 	    regfree (&preg);
@@ -199,7 +200,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
 		cerr<<"Must be an integer between 1 and 9999 milliseconds"<<endl;
 		cerr<<"Default value 1500 has been used instead"<<endl;
 	    }
-	    else show_duration = atoi(arg);
+	    else settings.show_duration = atoi(arg);
 
 	    // Free preg struture
 	    regfree (&preg);

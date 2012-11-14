@@ -3,6 +3,8 @@
 #include "player.h"
 #include "config.h"
 
+extern Settings settings;
+
 static int playerCount = 0;
 
 Player::Player(Board* board, const char* name)
@@ -103,8 +105,7 @@ DumbComputer::DumbComputer(Board* board):Computer(board){}
 
 int DumbComputer::chooseSquare()
 {
-    extern int show_duration;
-    SDL_Delay(show_duration/3);
+    SDL_Delay(settings.show_duration/3);
 
     SDL_Event event;
 

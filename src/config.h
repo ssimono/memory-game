@@ -1,6 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <string>
+
 const int NB_LINES		= 5;
 const int NB_COLUMNS		= 4;
 
@@ -39,5 +41,17 @@ static int get_screen_width()
 		NB_COLUMNS * (SQUARE_WIDTH + SQUARE_MARGIN_RIGHT) +
 		SCORE_PANEL_WIDTH;
 }
+
+/*
+ * Struct used to store settings set at runtime
+ */
+struct Settings
+{
+    // string defining type and numers of players:
+    std::string players_list;
+
+    // Milliseconds during which cards are shown:
+    int show_duration;
+};
 
 #endif

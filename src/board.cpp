@@ -5,6 +5,8 @@
 #include "board.h"
 #include "config.h"
 
+extern Settings settings;
+
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
 {
     // Throw an exception id the number of squares is not even
@@ -47,9 +49,7 @@ int Board::flipSquareIn(int x, int y)
 	    break;
 	case SECOND_TOUR:
 	    this->visible[1] = choice;
-
-	    extern int show_duration;
-	    SDL_Delay(show_duration);
+	    SDL_Delay(settings.show_duration);
 	    break;
 	default:
 	    break;
