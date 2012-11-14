@@ -60,6 +60,11 @@ static struct argp_option options[] =
 static error_t parse_opt (int key, char *arg, struct argp_state *state);
 
 /**
+ * Utility to match a regex pattern within a string
+ */
+bool matchPattern(const char* pattern, string target);
+
+/**
  * Main SDL_Surface
  */
 SDL_Surface* screen;
@@ -168,50 +173,24 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
     {
 	case 'p': // Players list
 	{
-	    // Validation regular expression
-	    const char* str_regex = "^(H|C){1,6}$";
-	    
-	    // Regular expression structure
-	    regex_t preg;
-	    
-	    // Compilation
-	    regcomp (&preg, str_regex, REG_NOSUB|REG_EXTENDED);
-
-	    // Test
-	    if( regexec(&preg, arg, 0, NULL, 0) == REG_NOMATCH )
+	    if( !matchPattern("^(H|C){1,6}$", arg) )
 	    {
-		cerr<<"Warning: \""<<arg<<"\" is not a valid players list string."<<endl;
+	    	cerr<<"Warning: \""<<arg<<"\" is not a valid players list string."<<endl;
 		cerr<<"Default value \"HC\" has been used instead"<<endl;
 	    }
 	    else settings.players_list = string(arg);
-
-	    // Free preg struture
-	    regfree (&preg);
 
 	    break;
 	}
 	case 's': // Showing time
 	{
-	    // Validation regular expression
-	    const char* str_regex = "^[[:digit:]]{1,4}$";
-	    
-	    // Regular expression structure
-	    regex_t preg;
-	    
-	    // Compilation
-	    regcomp (&preg, str_regex, REG_NOSUB|REG_EXTENDED);
-
-	    // Test
-	    if( regexec(&preg, arg, 0, NULL, 0) == REG_NOMATCH )
+	    if( !matchPattern("^[[:digit:]]{1,4}$", arg) )
 	    {
 		cerr<<"Warning: \""<<arg<<"\" is not a valid showing time number"<<endl;
 		cerr<<"Must be an integer between 1 and 9999 milliseconds"<<endl;
 		cerr<<"Default value 1500 has been used instead"<<endl;
 	    }
 	    else settings.show_duration = atoi(arg);
-
-	    // Free preg struture
-	    regfree (&preg);
 
 	    break;
 	}
@@ -224,4 +203,24 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
 	    return ARGP_ERR_UNKNOWN;
     }
     return 0;
+}
+
+bool matchPattern(const char* pattern, string target)
+{
+    bool result = false;
+	    
+    // Regular expression structure
+    regex_t preg;
+	    
+    // Compilation
+    regcomp (&preg, pattern, REG_NOSUB|REG_EXTENDED);
+
+    // Test
+    if( regexec(&preg, target.c_str(), 0, NULL, 0) == REG_NOMATCH ) result = false;
+    else result = true,
+
+    // Free preg struture
+    regfree (&preg);
+
+    return result;
 }
