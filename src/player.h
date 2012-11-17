@@ -8,6 +8,7 @@ using namespace std;
 class Player
 {
     public:
+	Player(const char* name="");
 	Player(Board* board, const char* name="");
 	
 	bool play();
@@ -15,6 +16,8 @@ class Player
 	
 	int getScore();
 	string getName();
+
+	void setBoard(Board* board);
 	
     protected:
 	Board* board;
@@ -27,12 +30,14 @@ class Player
 class Computer:public Player
 {
     public:
+	Computer(const char* name="");
 	Computer(Board* board, const char* name="");
 };
 
 class DumbComputer:public Computer
 {
     public:
+	DumbComputer();
 	DumbComputer(Board* board);
     
     protected:

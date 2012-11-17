@@ -23,6 +23,7 @@ class Game
     private:
 	void updateScorePanel();
 	
+	Board board;
 	PlayerList players;
 	PlayerList::iterator currentPlayer;
 	

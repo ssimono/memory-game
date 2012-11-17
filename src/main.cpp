@@ -9,7 +9,6 @@
 #include "config.h"
 #include "game_exception.h"
 #include "game.h"
-#include "board.h"
 #include "player.h"
 
 using namespace std;
@@ -103,8 +102,7 @@ int main(int argc, char** argv)
     
     try
     {
-	// Declare Board and Game objects
-	Board board(screen,NB_LINES, NB_COLUMNS);
+	// Declare Game object
 	Game game(screen);
 	
 	// Generate players according to players_list string
@@ -112,14 +110,13 @@ int main(int argc, char** argv)
 	for(int i=0; i<T; ++i) switch(settings.players_list[i])
 	{
 	    case 'H':
-		game.addPlayer(new Player(&board));
+		game.addPlayer(new Player);
 		break;
 	    case 'C':
-		game.addPlayer(new DumbComputer(&board));
+		game.addPlayer(new DumbComputer);
 		break;
 	    default:break;
 	}
-	
 	// Start the game
 	game.start();
     }

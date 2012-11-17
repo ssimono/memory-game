@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 #include <string>
 
 #include "game_exception.h"
@@ -7,9 +8,17 @@
 
 extern Settings settings;
 
+Board::Board()
+{;}
+
 Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
 {
-    // Throw an exception id the number of squares is not even
+   this->init(screen, nb_lines, nb_columns);
+}
+
+void Board::init(SDL_Surface* screen, int nb_lines, int nb_columns)
+{
+     // Throw an exception id the number of squares is not even
     if(nb_lines&1 && nb_columns&1) throw error::SquareNumberOdd(nb_lines,nb_columns);
     
     this->screen = screen;
@@ -17,7 +26,7 @@ Board::Board(SDL_Surface* screen, int nb_lines, int nb_columns)
     this->nbColumns = nb_columns;
     this->tour = FIRST_TOUR;
     this->nbSquaresFound = 0;
-    
+
     // Allocate required space in memory to make sure vector does not need to reallocate
     // I booked one more spot just in case it does not fit to the very last bit
     this->squares.reserve( (this->getNbSquares() + 1)*sizeof(Square) );

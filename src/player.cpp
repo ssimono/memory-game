@@ -12,7 +12,25 @@ Player::Player(Board* board, const char* name)
     using namespace std;
 
     playerCount++;
-    this->board = board;
+    this->score = 0;
+
+    this->name = string(name);
+
+    if(!this->name.size())
+    {
+	ostringstream oss;
+	oss<<"Player #"<<playerCount;
+	this->name = oss.str();
+    }
+
+    this->setBoard(board);
+}
+
+Player::Player(const char* name)
+{
+    using namespace std;
+
+    playerCount++;
     this->score = 0;
 
     this->name = string(name);
@@ -30,10 +48,14 @@ void Player::inscreaseScore()
     this->score++;
 }
 
+void Player::setBoard(Board* board)
+{
+    this->board = board;
+}
+
 bool Player::play()
 {
     if( this->board->isFinished() ) return false;
-    
     // First tour:
     int first_value = this->chooseSquare();
     
@@ -96,12 +118,14 @@ std::string Player::getName()
 }
 
 //-----------------------------------------------------------------------------
-Computer::Computer(Board* board, const char* name)
-:Player(board,name){}
+
+Computer::Computer(Board* board, const char* name):Player(board,name){}
+Computer::Computer(const char* name):Player(name){}
 
 //-----------------------------------------------------------------------------
 
 DumbComputer::DumbComputer(Board* board):Computer(board){}
+DumbComputer::DumbComputer():Computer(board){}
 
 int DumbComputer::chooseSquare()
 {
