@@ -2,10 +2,13 @@
 #define BOARD_H
 
 #include <vector>
+#include <list>
 
 #include "config.h"
 #include "game_exception.h"
 #include "square.h"
+
+using namespace std;
 
 struct SquarePosition
 {
@@ -18,6 +21,8 @@ enum Tour
     FIRST_TOUR,
     SECOND_TOUR
 };
+
+class Computer;
 
 /**
  * A Board game containing all squares
@@ -57,6 +62,11 @@ class Board
 	// IMPORTANT please merge this with a findSquare, with a private method used by both!
 	void handleHover(int x, int y);
 	
+	/**
+	 * Add a Computer in watchers array so it can "see" what is happening
+	 */
+	void addWatcher(Computer* computer);
+	
 	/*
 	 * Return a boolean telling if all squares have been found
 	 */
@@ -83,13 +93,15 @@ class Board
 	
 	int nbSquaresFound;
 	
-	std::vector<Square*> squares;
+	vector<Square*> squares;
 	SDL_Surface* screen;
 	
 	Square* visible[2];
 	Square* selected;
 
 	Tour tour;
+
+	list<Computer*> watchers;
 	
 	/**
 	 * Fill the board with squares and affect random pairs of values

@@ -17,7 +17,7 @@ class Player
 	int getScore();
 	string getName();
 
-	void setBoard(Board* board);
+	virtual void setBoard(Board* board);
 	
     protected:
 	Board* board;
@@ -32,6 +32,9 @@ class Computer:public Player
     public:
 	Computer(const char* name="");
 	Computer(Board* board, const char* name="");
+        
+	void setBoard(Board* board);
+	void seeMovement(int x, int y, int value);
 };
 
 class DumbComputer:public Computer

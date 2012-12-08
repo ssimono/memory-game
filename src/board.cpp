@@ -5,6 +5,9 @@
 #include "game_exception.h"
 #include "board.h"
 #include "config.h"
+#include "player.h"
+
+using namespace std;
 
 extern Settings settings;
 
@@ -38,7 +41,7 @@ void Board::init(SDL_Surface* screen, int nb_lines, int nb_columns)
 
 Board::~Board()
 {
-    std::vector<Square*>::iterator it;
+    vector<Square*>::iterator it;
     for (it = this->squares.begin() ; it < this->squares.end() ; ++it)
 	delete *it;
 }
@@ -66,6 +69,11 @@ int Board::flipSquareIn(int x, int y)
 
     // Set selected pointer to NULL so it won't get hide when on mouse leave
     this->selected = NULL;
+
+    // Show the value to all watchers of the board
+    list<Computer*>::iterator it;
+    for(it = this->watchers.begin() ; it != this->watchers.end() ; ++it)
+	(*it)->seeMovement(x,y,choice->getValue());
 
     return choice->getValue();
 }
@@ -151,6 +159,11 @@ void Board::handleHover(int x, int y)
     catch(...){}
 }
 
+void Board::addWatcher(Computer* computer)
+{
+    this->watchers.push_back(computer);
+}
+
 bool Board::isFinished()
 {
     return this->nbSquaresFound == this->getNbSquares();
@@ -180,7 +193,7 @@ void Board::fill()
     for (int i=0; i < nb_squares/2 ; ++i) values[2*i] = values[2*i+1] = i;
     
     // Shuffle up the values array
-    std::random_shuffle(values, values + nb_squares);
+    random_shuffle(values, values + nb_squares);
     
     for(int i = 0; i < nb_squares; ++i)
     {

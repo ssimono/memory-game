@@ -3,14 +3,14 @@
 #include "player.h"
 #include "config.h"
 
+using namespace std;
+
 extern Settings settings;
 
 static int playerCount = 0;
 
 Player::Player(Board* board, const char* name)
 {
-    using namespace std;
-
     playerCount++;
     this->score = 0;
 
@@ -28,8 +28,6 @@ Player::Player(Board* board, const char* name)
 
 Player::Player(const char* name)
 {
-    using namespace std;
-
     playerCount++;
     this->score = 0;
 
@@ -92,7 +90,6 @@ int Player::chooseSquare()
                 throw signal::UserQuitRequest();
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                using namespace std;
                 try
                 {
                     SquarePosition pos = this->board->findSquare(event.button.x, event.button.y);
@@ -112,7 +109,7 @@ int Player::getScore()
     return this->score;
 }
 
-std::string Player::getName()
+string Player::getName()
 {
     return this->name;
 }
@@ -122,6 +119,17 @@ std::string Player::getName()
 Computer::Computer(Board* board, const char* name):Player(board,name){}
 Computer::Computer(const char* name):Player(name){}
 
+void Computer::setBoard(Board* board)
+{
+    this->board = board;
+
+    this->board->addWatcher(this);
+}
+
+void Computer::seeMovement(int x, int y, int value)
+{
+    cerr<<"A square of value "<<value<<" has been flipped at ("<<x<<','<<y<<')'<<endl;
+}
 //-----------------------------------------------------------------------------
 
 DumbComputer::DumbComputer(Board* board):Computer(board){}
