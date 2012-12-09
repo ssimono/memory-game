@@ -22,7 +22,11 @@ Settings settings;
 /**
  * Basic information for command line invocation
  */
+#ifdef RELEASE
 const char* argp_program_version = "Memory Game v1.0";
+#else
+const char* argp_program_version = "debug build";
+#endif
 const char* argp_program_bug_address = "<simon@sa-web.fr>";
 static char doc[] =
 "Memory Game - A simple memory game for entertainment\v\
