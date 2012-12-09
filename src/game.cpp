@@ -4,6 +4,7 @@
 
 #include <SDL/SDL_ttf.h>
 
+#include "config.h"
 #include "game_exception.h"
 #include "game.h"
 
@@ -15,6 +16,8 @@ Game::Game(SDL_Surface* screen)
     
     font=TTF_OpenFont( (string(SHARE_FOLDER)+string("NobileFont/nobile.ttf")).c_str(), 20);
     if(!font)	throw GameException( std::string(TTF_GetError()) );
+
+    this->board.init(this->screen, NB_LINES, NB_COLUMNS);
 }
 
 Game::~Game()
@@ -74,6 +77,7 @@ void Game::updateScorePanel()
 
 void Game::addPlayer(Player* player)
 {
+    player->setBoard(&this->board);
     this->players.push_back(player);
     this->currentPlayer = this->players.begin();
 }

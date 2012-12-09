@@ -27,7 +27,9 @@ class Board
 {
     public:
 	Board(SDL_Surface* screen, int nb_lines, int nb_columns);
+	Board();
 	~Board();
+	void init(SDL_Surface* screen, int nb_lines, int nb_columns);
 	
 	/**
 	 * Flip the square located ad [x,y] on the grid and shows the image
