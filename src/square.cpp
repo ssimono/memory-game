@@ -4,7 +4,9 @@
 #include "square.h"
 #include "config.h"
 
-std::string images[23] = {"araignee.bmp","arbre.bmp","ballon.bmp","champignon.bmp","clou.bmp","coquillage.bmp","creme.bmp","douche.bmp","elephant.bmp","fesses.bmp","guitarre.bmp","igloo.bmp","judoka.bmp","maison.bmp","manette.bmp","ours.bmp","pamplemousse.bmp","parapluie.bmp","piece.bmp","poule.bmp","salade.bmp","tasse.bmp","tetine.bmp"};
+using namespace std;
+
+string images[23] = {"araignee.bmp","arbre.bmp","ballon.bmp","champignon.bmp","clou.bmp","coquillage.bmp","creme.bmp","douche.bmp","elephant.bmp","fesses.bmp","guitarre.bmp","igloo.bmp","judoka.bmp","maison.bmp","manette.bmp","ours.bmp","pamplemousse.bmp","parapluie.bmp","piece.bmp","poule.bmp","salade.bmp","tasse.bmp","tetine.bmp"};
 
 Square::Square(short id, short value, int position_x, int position_y)
 {
@@ -13,7 +15,7 @@ Square::Square(short id, short value, int position_x, int position_y)
     
     // Loads a SDL_Surface to hold the image data
     // Image is chosen according to square instance's value
-    std::string file_path = std::string("share/squares/") + images[this->value];
+    string file_path = string("share/squares/") + images[this->value];
     this->sdl_surface = SDL_LoadBMP( file_path.c_str() );
     
     // Throw an exception if the file is not correctly loaded
