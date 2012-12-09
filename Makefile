@@ -12,6 +12,9 @@ all:
 	$(COMPILE) -c $(SRC)
 	$(COMPILE) -o $(BIN) $(OBJ) $(CFLAGS) $(LIBS)
 
+release:
+	$(COMPILE) -DRELEASE -c $(SRC)
+	$(COMPILE) -o $(BIN) $(OBJ) $(CFLAGS) $(LIBS)
 clean:
 	rm *.o
 	rm $(BIN)
