@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Memory game
+Comment=Train your memory skills
+#Icon=memory-game
+Exec=/usr/bin/memory-game
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Game;
+Keywords=memory
+StartupNotify=true

@@ -53,6 +53,7 @@ Description: A funny game to train your memory skills"\
 
 # Fill with required files
 install -D $base_dir/$name $tmp/usr/bin/$name
+install -D $base_dir/data/$name.desktop $tmp/usr/share/applications/$name.desktop
 
 cd $base_dir/share
 for i in `find . -type f`
