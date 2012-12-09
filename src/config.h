@@ -3,6 +3,12 @@
 
 #include <string>
 
+#ifdef RELEASE
+static const char* SHARE_FOLDER = "/usr/share/memory-game/";
+#else
+static const char* SHARE_FOLDER = "share/";
+#endif
+
 const int NB_LINES		= 5;
 const int NB_COLUMNS		= 4;
 

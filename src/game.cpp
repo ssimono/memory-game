@@ -13,7 +13,7 @@ Game::Game(SDL_Surface* screen)
 {
     this->screen = screen;
     
-    font=TTF_OpenFont("share/NobileFont/nobile.ttf", 20);
+    font=TTF_OpenFont( (string(SHARE_FOLDER)+string("NobileFont/nobile.ttf")).c_str(), 20);
     if(!font)	throw GameException( std::string(TTF_GetError()) );
 }
 

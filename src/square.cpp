@@ -15,7 +15,7 @@ Square::Square(short id, short value, int position_x, int position_y)
     
     // Loads a SDL_Surface to hold the image data
     // Image is chosen according to square instance's value
-    string file_path = string("share/squares/") + images[this->value];
+    string file_path = string(SHARE_FOLDER) + string("squares/") + images[this->value];
     this->sdl_surface = SDL_LoadBMP( file_path.c_str() );
     
     // Throw an exception if the file is not correctly loaded
