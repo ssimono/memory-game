@@ -8,6 +8,18 @@ name='memory-game'
 tmp="/tmp/$name"
 base_dir=$(dirname $0)/..
 
+# Make sure no file is modified
+cd $base_dir
+if [ $(git status --porcelain | wc -l) != 0 ]; then
+    echo 'Some files are modified or untracked. They may be added to the .deb package'
+    echo 'Is it what you want? (yes/no): ' && read ans
+    if [ $ans == no ]; then
+        echo 'Packaging procedure aborted.'
+        exit
+    fi
+fi
+cd -
+
 # Make sure the built binary exists
 if [ ! -e $base_dir/$name ]; then
     echo 'Program memory-game not found. Make sure you first built it'
