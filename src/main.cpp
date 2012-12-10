@@ -21,7 +21,11 @@ Settings settings;
 /**
  * Basic information for command line invocation
  */
+#ifdef RELEASE
 const char* argp_program_version = "Memory Game v1.0";
+#else
+const char* argp_program_version = "debug build";
+#endif
 const char* argp_program_bug_address = "<simon@sa-web.fr>";
 static char doc[] =
 "Memory Game - A simple memory game for entertainment\v\
@@ -31,7 +35,7 @@ DESCRIPTION\n\
 \t\tH adds a human player\n\
 \t\tC adds a computer A.I\n\
 \t\te.g. -p HCHC will launch a four players game with two humans and two A.I\n\
-\t--show-duration, -s:\n\
+\t--show-duration, -t:\n\
 \t\tValue of this option is an interger between 0 and 9999\n\
 \t\tThis corresponds to the number of milliseconds during which cards\n\
 \t\tare left shown.\n\
@@ -50,7 +54,7 @@ static struct argp_option options[] =
 	"Specify type and number of players, default to \"HC\""
     },
     {	// Integer representing milliseconds if showing time
-	"show-duration",'s',
+	"show-duration",'t',
 	"SHOW_DURATION",
 	0,
 	"Specify time during which cards are shown, default to 1500"
@@ -185,7 +189,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
 
 	    break;
 	}
-	case 's': // Showing time
+	case 't': // Showing time
 	{
 	    if( !matchPattern("^[[:digit:]]{1,4}$", arg) )
 	    {
