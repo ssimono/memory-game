@@ -183,7 +183,9 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
 	    if( !matchPattern("^(H|C){1,6}$", arg) )
 	    {
 	    	cerr<<"Warning: \""<<arg<<"\" is not a valid players list string."<<endl;
-		cerr<<"Default value \"HC\" has been used instead"<<endl;
+                cerr<<"String much match (H|C){1,6}"<<endl;
+                
+                return ARGP_ERR_UNKNOWN;
 	    }
 	    else settings.players_list = string(arg);
 
@@ -193,9 +195,10 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
 	{
 	    if( !matchPattern("^[[:digit:]]{1,4}$", arg) )
 	    {
-		cerr<<"Warning: \""<<arg<<"\" is not a valid showing time number"<<endl;
+		cerr<<"Error: \""<<arg<<"\" is not a valid showing time number"<<endl;
 		cerr<<"Must be an integer between 1 and 9999 milliseconds"<<endl;
-		cerr<<"Default value 1500 has been used instead"<<endl;
+                
+                return ARGP_ERR_UNKNOWN;
 	    }
 	    else settings.show_duration = atoi(arg);
 
