@@ -71,6 +71,12 @@ namespace error
     {
 	public: NoPlayers():GameException(std::string("Cannot start the game without at least one player")){};
     };
+    
+    class WrongValue:public GameException
+    {
+	public: WrongValue():GameException(std::string("You tried to set a\
+ position to a recollection that has a different value")){};
+    };
 }
 
 namespace signal
@@ -78,6 +84,7 @@ namespace signal
     class ClickedOutside:public GameSignal{};
     class UserQuitRequest:public GameSignal{};
     class AlreadyVisible:public GameSignal{};
+    class AlreadyFound: public GameSignal{};
     class BoardComplete:public GameSignal{};
 }
 

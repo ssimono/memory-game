@@ -117,6 +117,9 @@ int main(int argc, char** argv)
 		game.addPlayer(new Player);
 		break;
 	    case 'C':
+		game.addPlayer(new PerfectComputer);
+		break;
+            case 'D':
 		game.addPlayer(new DumbComputer);
 		break;
 	    default:break;
@@ -180,10 +183,10 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
     {
 	case 'p': // Players list
 	{
-	    if( !matchPattern("^(H|C){1,6}$", arg) )
+	    if( !matchPattern("^(H|C|D){1,6}$", arg) )
 	    {
 	    	cerr<<"Warning: \""<<arg<<"\" is not a valid players list string."<<endl;
-                cerr<<"String much match (H|C){1,6}"<<endl;
+                cerr<<"String must match (H|C|D){1,6}"<<endl;
                 
                 return ARGP_ERR_UNKNOWN;
 	    }

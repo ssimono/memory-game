@@ -93,6 +93,11 @@ void Board::hideVisibleSquares()
 	second->markFound(s);
 	
 	this->nbSquaresFound += 2;
+        
+        // Tell all watchers that a couple has been found
+        list<Computer*>::iterator it;
+        for(it = this->watchers.begin() ; it != this->watchers.end() ; ++it)
+            (*it)->seeFoundCouple(first->getValue());
 	
 	if( this->isFinished() ) throw signal::BoardComplete();
     }

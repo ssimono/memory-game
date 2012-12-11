@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "board.h"
+#include "recollection.h"
 
 using namespace std;
 
@@ -34,7 +35,8 @@ class Computer:public Player
 	Computer(Board* board, const char* name="");
         
 	void setBoard(Board* board);
-	void seeMovement(int x, int y, int value);
+	virtual void seeMovement(int x, int y, int value);
+        virtual void seeFoundCouple(int value);
 };
 
 class DumbComputer:public Computer
@@ -45,6 +47,24 @@ class DumbComputer:public Computer
     
     protected:
 	int chooseSquare();
+};
+
+class PerfectComputer:public Computer
+{
+    public:
+        PerfectComputer();
+        PerfectComputer(Board* board);
+        ~PerfectComputer();
+
+        void setBoard(Board* board);
+        void seeMovement(int x, int y, int value);
+        void seeFoundCouple(int value);
+
+    protected:
+        vector<Recollection*> recolls;
+
+        int chooseSquare();
+        void updateRecolls(int x, int y, int value);
 };
 
 #endif
