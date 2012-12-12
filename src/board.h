@@ -36,56 +36,22 @@ class Board
 	~Board();
 	void init(SDL_Surface* screen, int nb_lines, int nb_columns);
 	
-	/**
-	 * Flip the square located ad [x,y] on the grid and shows the image
-	 * @return Value of the square
-	 */
 	int flipSquareIn(int x, int y);
         int flipSquareIn(int id);
 	
-	/**
-	 * Flip out squares that have been flipped in
-	 * should only be called after second tour
-	 */
 	void hideVisibleSquares();
 	
-	/**
-	 * Return the [column,line] position of the square that has been clicked
-	 * by a click event on [x,y]
-	 * @return SquarePosition
-	 * @throw signal::ClickedOutside if no square is located at the given coordinates
-	 */
 	SquarePosition findSquare(int x, int y);
 	
-	/**
-	 * Trigger hover style on square hovered by [x,y] cursor
-	 */
 	// IMPORTANT please merge this with a findSquare, with a private method used by both!
 	void handleHover(int x, int y);
 	
-	/**
-	 * Add a Computer in watchers array so it can "see" what is happening
-	 */
 	void addWatcher(Computer* computer);
-	
-	/*
-	 * Return a boolean telling if all squares have been found
-	 */
-	bool isFinished();
-	
-	/**
-	 * Return the number of squares on the board
-	 */
-	int getNbSquares();
 
-	/**
-	 * Return the number of lines on the board
-	 */
+	bool isFinished();
+        
+	int getNbSquares();
 	int getNbLines();
-	
-	/**
-	 * Return the number of columns on the board
-	 */
 	int getNbColumns();
 
     private:
@@ -103,16 +69,8 @@ class Board
 	Tour tour;
 
 	list<Computer*> watchers;
-	
-	/**
-	 * Fill the board with squares and affect random pairs of values
-	 */
+
 	void fill();
-	
-	/**
-	 * Free n first squares, in case nth square crashed
-	 * @param n First squares to clean, n not included
-	 */
 	void cleanFirstSquares(int n);
 };
 
