@@ -78,6 +78,11 @@ int Board::flipSquareIn(int x, int y)
     return choice->getValue();
 }
 
+int Board::flipSquareIn(int id)
+{
+    return this->flipSquareIn(id % this->nbColumns, id / this->nbColumns);
+}
+
 void Board::hideVisibleSquares()
 {
     // Squares can only be flipped out again after second tour

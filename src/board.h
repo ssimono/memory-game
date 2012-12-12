@@ -41,6 +41,7 @@ class Board
 	 * @return Value of the square
 	 */
 	int flipSquareIn(int x, int y);
+        int flipSquareIn(int id);
 	
 	/**
 	 * Flip out squares that have been flipped in

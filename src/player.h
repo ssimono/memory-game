@@ -25,7 +25,7 @@ class Player
 	int score;
 	string name;
 	
-	virtual int chooseSquare();
+	virtual int chooseSquare(int first_value = -1);
 };
 
 class Computer:public Player
@@ -37,6 +37,9 @@ class Computer:public Player
 	void setBoard(Board* board);
 	virtual void seeMovement(int x, int y, int value);
         virtual void seeFoundCouple(int value);
+    
+    protected:
+        int pickRandomSquare();
 };
 
 class DumbComputer:public Computer
@@ -46,7 +49,7 @@ class DumbComputer:public Computer
 	DumbComputer(Board* board);
     
     protected:
-	int chooseSquare();
+	int chooseSquare(int first_value = -1);
 };
 
 class PerfectComputer:public Computer
@@ -63,7 +66,7 @@ class PerfectComputer:public Computer
     protected:
         vector<Recollection*> recolls;
 
-        int chooseSquare();
+        int chooseSquare(int first_value = -1);
         void updateRecolls(int x, int y, int value);
 };
 

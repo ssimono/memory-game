@@ -54,11 +54,12 @@ void Player::setBoard(Board* board)
 bool Player::play()
 {
     if( this->board->isFinished() ) return false;
-    // First tour:
+    
+    // First turn:
     int first_value = this->chooseSquare();
     
-    // Second tour:
-    int second_value = this->chooseSquare();
+    // Second turn:
+    int second_value = this->chooseSquare( first_value );
     
     // Hide squares:
     this->board->hideVisibleSquares();
@@ -66,7 +67,7 @@ bool Player::play()
     return (first_value == second_value);
 }
 
-int Player::chooseSquare()
+int Player::chooseSquare(int first_value)
 {
     SDL_Event event;
     
@@ -129,15 +130,9 @@ void Computer::setBoard(Board* board)
 void Computer::seeMovement(int x, int y, int value){}
 
 void Computer::seeFoundCouple(int value){}
-//-----------------------------------------------------------------------------
 
-DumbComputer::DumbComputer(Board* board):Computer(board){}
-DumbComputer::DumbComputer():Computer(){}
-
-int DumbComputer::chooseSquare()
+int Computer::pickRandomSquare()
 {
-    SDL_Delay(settings.show_duration/3);
-
     SDL_Event event;
 
     while(true)
@@ -149,16 +144,27 @@ int DumbComputer::chooseSquare()
 
 	try
 	{
-	    int col = rand()%this->board->getNbColumns();
-	    int line = rand()%this->board->getNbLines();
-	 
-	    int value = this->board->flipSquareIn(col,line);
+	    int pos = rand()%this->board->getNbSquares();
+	    
+	    int value = this->board->flipSquareIn(pos);
 
 	    return value;
 	}
 	catch(signal::AlreadyVisible){ continue; }
         catch(signal::AlreadyFound){ continue; }
     }
+}
+
+//-----------------------------------------------------------------------------
+
+DumbComputer::DumbComputer(Board* board):Computer(board){}
+DumbComputer::DumbComputer():Computer(){}
+
+int DumbComputer::chooseSquare(int first_value)
+{
+    SDL_Delay(settings.show_duration/3);
+    
+    return this->pickRandomSquare();
 }
 
 //-----------------------------------------------------------------------------
@@ -180,34 +186,41 @@ void PerfectComputer::setBoard(Board* board)
 PerfectComputer::~PerfectComputer()
 {
     vector<Recollection*>::iterator it;
-    for (it = this->recolls.begin() ; it < this->recolls.end() ; ++it)
+    for (it = this->recolls.begin() ; it != this->recolls.end() ; ++it)
         delete *it;
 }
 
-int PerfectComputer::chooseSquare()
+int PerfectComputer::chooseSquare(int first_value)
 {
     SDL_Delay(settings.show_duration/3);
-
-    SDL_Event event;
-
-    while(true)
-    {
-	// Makes sure user did not ask to quit
-	while(SDL_PollEvent(&event))
-	    if(event.type == SDL_QUIT || event.type == SDL_KEYDOWN)
-		throw signal::UserQuitRequest();
-
-	try
-	{
-	    int col = rand()%this->board->getNbColumns();
-	    int line = rand()%this->board->getNbLines();
-	 
-	    int value = this->board->flipSquareIn(col,line);
-
-	    return value;
-	}
-	catch(signal::AlreadyVisible){ continue; }
-        catch(signal::AlreadyFound){ continue; }
+    
+    if( first_value == -1 ) // First turn
+    {        
+        // First try to find pairs in squares already seen
+        vector<Recollection*>::iterator it;
+        for (it = this->recolls.begin() ; it != this->recolls.end() ; ++it)
+            if( (*it)->getStatus() == MATCHED )
+            {
+                int pos = (*it)->getPosition1();
+                return this->board->flipSquareIn(pos);
+            }
+        
+        // If no pairs has been noticed before, pick random
+        return this->pickRandomSquare();
+    }
+    else // Second turn
+    {        
+        // First try to flip the sibling of first square flipped
+        if( this->recolls[first_value]->getStatus() == MATCHED )
+        {
+            Recollection* recoll = this->recolls[first_value];
+            try{
+                return this->board->flipSquareIn( recoll->getPosition2() );
+            }catch(signal::AlreadyVisible){
+                return this->board->flipSquareIn( recoll->getPosition1() );
+            }
+        }
+        else return this->pickRandomSquare();
     }
 }
 
@@ -220,18 +233,6 @@ void PerfectComputer::updateRecolls(int x, int y, int value)
 void PerfectComputer::seeMovement(int x, int y, int value)
 {
     this->updateRecolls(x,y,value);
-    
-    // debug:
-    int i=0;
-    vector<Recollection*>::iterator it;
-    for (it = this->recolls.begin() ; it < this->recolls.end() ; ++it){
-        cerr<<"["<<i<<": (";
-        if((*it)->getStatus()==CLEARED) cerr<<"e";
-        else cerr<<(*it)->getPosition1()<<";"<<(*it)->getPosition2();
-        cerr<<")] ";
-        ++i;
-    }
-    cerr<<endl;
 }
 
 void PerfectComputer::seeFoundCouple(int value)
