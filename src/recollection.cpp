@@ -10,9 +10,9 @@ Recollection::Recollection(int value)
 
 int Recollection::getPosition1(){ return this->Position1; }
 int Recollection::getPosition2(){ return this->Position2; }
-enum RecollStatus Recollection::getStatus(){ return this->Status; }
+RecollStatus Recollection::getStatus(){ return this->Status; }
 
-enum RecollStatus Recollection::setPosition(int position, int value)
+RecollStatus Recollection::setPosition(int position, int value)
 {
     // Check we are setting a position to the right valued square:
     if(value != this->Value) throw error::WrongValue();
