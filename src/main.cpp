@@ -152,7 +152,7 @@ int main(int argc, char** argv)
 void initSDL()
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cerr<<"Error at initializing SDL"<<SDL_GetError()<<'\n';
+        std::cerr<<"Error at initializing SDL: "<<SDL_GetError()<<'\n';
         exit(EXIT_FAILURE);
     }
     atexit(SDL_Quit);
