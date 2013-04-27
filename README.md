@@ -21,12 +21,6 @@ On debian-based distributions, a simple
 should do the job.
 
 Then `make` to build the game.
-    
-### On Windows:
-To build with ming32, you need SDL and SDL_ttf Libraries as well. Paste Include files into {include path}\SDL and lib files into {lib path}. Make sure you add these options for link editing:
-`-lmingw32 -lSDLmain -lSDL`
-
-To run the game, put the SDL.dll and SDL_ttf.dll files in the same directory as the built exe.
 
 About
 -----
